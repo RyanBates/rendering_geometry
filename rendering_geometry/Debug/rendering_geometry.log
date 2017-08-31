@@ -2,5 +2,5 @@
   Geo.cpp
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\dep\glm\gtx\scalar_multiplication.hpp(85): error C2719: 'rh': formal parameter with requested alignment of 16 won't be aligned
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\dep\glm\gtx\scalar_multiplication.hpp(85): error C2719: 'lh': formal parameter with requested alignment of 16 won't be aligned
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(30): warning C4316: 'Vertex': object allocated on the heap may not be aligned 16
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(44): warning C4316: 'Vertex': object allocated on the heap may not be aligned 16
   Generating Code...

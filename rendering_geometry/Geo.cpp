@@ -1,10 +1,24 @@
 #include "Geo.h"
 #include "gl_core_4_4.h"
+#include <glfw\include\GLFW\glfw3.h>
+#include <stdio.h>
+#include <assert.h>
 #include <glm\ext.hpp>
 #include <glm\fwd.hpp>
 #include <glm\glm.hpp>
 
 using namespace glm;
+
+
+IN vec4 pos;
+IN vec4 colour;
+
+OUT vec4 vColour;
+
+mat4 projectionViewWorldMatrix;
+
+float times;
+float heightScale;
 
 Geo::Geo()
 {
@@ -73,7 +87,19 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	glGenBuffers(1, &m_IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);	//generates the Vertex Array Object	glGenBuffers(1, &m_VBO);	glGenBuffers(1, &m_IBO);	glGenVertexArrays(1, &m_VAO);	glBindVertexArray(m_VAO);	//code to bind VBO & IBO.	glBindBuffer(m_VBO, m_IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	//generates the Vertex Array Object
+	glGenBuffers(1, &m_VBO);
+	glGenBuffers(1, &m_IBO);
+
+	glGenVertexArrays(1, &m_VAO);
+
+	glBindVertexArray(m_VAO);
+
+	//code to bind VBO & IBO.
+	glBindBuffer(m_VBO, m_IBO);
+
 	glBindVertexArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -127,15 +153,6 @@ void Geo::startup()
 		delete[] infoLog;
 	}
 
-	glUseProgram(m_programID);
-	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
-	glUniformMatrix4fv(projectionViewUniform, 1, false, m_projectionViewUniform);
-
-	glBindVertexArray(m_VAO);
-	unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
-	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
-
-
 	glDeleteShader(fragmentShader);
 	glDeleteShader(vertexShader);
 }
@@ -150,6 +167,14 @@ void Geo::update(float)
 
 void Geo::draw()
 {
+	glUseProgram(m_programID);
+	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
+	glUniformMatrix4fv(projectionViewUniform, 1, false, m_projectionViewUniform);
+
+	glBindVertexArray(m_VAO);
+	unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
@@ -160,20 +185,9 @@ void Geo::run()
 
 void Geo::main()
 {
-	IN vec4 pos;
-	IN vec4 colour;
-
-	OUT vec4 vColour;
-
-	mat4 projectionViewWorldMatrix;
-
-	float time;
-	float heightScale;
 
 	vColour = colour;
 	vec4 P = pos;
-	P.y += sin(time + pos.x)* heightScale;
-	gl_Position = projectionViewWorldMatrix * P;
-
+	P.y += sin(times + pos.x) * heightScale;
 
 }
