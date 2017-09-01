@@ -6,6 +6,7 @@
 #include <glm\fwd.hpp>
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
+#include <vector>
 
 Geo::Geo()
 {
@@ -82,13 +83,6 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	delete[] auiIndices;
 }
 
-/*
-unknown pre-processor directive #version410
-syntax error, unexpected'<', expecting ::
-out cant be used with no-varying vColor
-incompatible options for link
-*/
-
 void Geo::startup()
 {
 	const char* vsSource = "#version 410\n \
@@ -135,7 +129,16 @@ void Geo::startup()
 	glDeleteShader(fragmentShader);
 	glDeleteShader(vertexShader);
 
-	//generateGrid(10, 10);
+	Vertex a = { glm::vec4(-5,  0, 0, 1)		, glm::vec4(.1, .1, .1, 1) };//bl	
+	Vertex b = { glm::vec4(5,  0, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//br
+	Vertex c = { glm::vec4(5, -5, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//tl
+	Vertex d = { glm::vec4(-5, -5, 0, 1)		, glm::vec4(1, 0, 0, 1) };//tr
+	Vertex e = { glm::vec4(-5,  5, 0, 1)		, glm::vec4(0, 0, 1, 1) };//tr	
+
+	std::vector<Vertex> vertices{ a,b,c,d,e };
+	std::vector<unsigned int> indices{ 0, 1, 2, 0, 2, 3, 0, 4, 1 };
+
+
 }
 
 
@@ -145,6 +148,7 @@ void Geo::draw()
 	ImGui::Begin("window");
 	ImGui::Text("hello world");
 	ImGui::End();
+	
 	//glUseProgram(m_programID);
 	//unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
 	//glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
@@ -162,6 +166,7 @@ void Geo::draw()
 
 void Geo::update(float)
 {
+	
 }
 
 
