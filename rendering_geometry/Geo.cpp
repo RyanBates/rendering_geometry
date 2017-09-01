@@ -32,10 +32,9 @@ Geo::~Geo()
 
 struct Vertex
 {
-	vec4 Pos;
+	vec4 Position;
 	vec4 Color;
 };
-
 
 
 void Geo::generateGrid(unsigned int rows, unsigned int cols)
@@ -46,7 +45,7 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	for (unsigned int r = 0; r < rows; ++r)
 		for (unsigned int c = 0; c < cols; ++c)
 		{
-			aoVertices[r*cols + c].Pos = vec4((float)c, 0, (float)r, 1);
+			aoVertices[r*cols + c].Position = vec4((float)c, 0, (float)r, 1);
 			// create some arbitrary colour based off something
 			// that might not be related to tiling a texture
 			vec3 colour = vec3(sinf((c / (float)(cols - 1))* (r / (float)(rows - 1))));
@@ -73,6 +72,8 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 
 	//generates the Vertex Buffer Object
 	glGenBuffers(1, &m_VBO);
+	glGenBuffers(1, &m_VBO);
+	glGenBuffers(1, &m_IBO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, (rows * cols) * sizeof(Vertex), aoVertices, GL_STATIC_DRAW);
 
@@ -89,10 +90,6 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	//generates the Vertex Array Object
-	glGenBuffers(1, &m_VBO);
-	glGenBuffers(1, &m_IBO);
-
 	glGenVertexArrays(1, &m_VAO);
 
 	glBindVertexArray(m_VAO);
@@ -100,18 +97,15 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	//code to bind VBO & IBO.
 	glBindBuffer(m_VBO, m_IBO);
 
-	glBindVertexArray(0);
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
 	delete[] aoVertices;
+	delete[] auiIndices;
 }
 
 void Geo::startup()
 {
-	generateGrid(10, 10);
-
 	const char* vsSource = "#version410\n \
 							layout(location=0) in vec4 Pos; \
 							layout(location=1) in vec4 Color; \
@@ -155,6 +149,8 @@ void Geo::startup()
 
 	glDeleteShader(fragmentShader);
 	glDeleteShader(vertexShader);
+
+	generateGrid(10, 10);
 }
 
 void Geo::shutdown()
@@ -172,8 +168,10 @@ void Geo::draw()
 	glUniformMatrix4fv(projectionViewUniform, 1, false, m_projectionViewUniform);
 
 	glBindVertexArray(m_VAO);
+
 	unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
