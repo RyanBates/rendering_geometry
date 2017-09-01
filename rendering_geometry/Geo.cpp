@@ -149,17 +149,19 @@ void Geo::draw()
 	ImGui::Text("hello world");
 	ImGui::End();
 	
-	//glUseProgram(m_programID);
-	//unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
-	//glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
+	generateGrid(10, 10);
 
-	//glBindVertexArray(m_VAO); 
+	glUseProgram(m_programID);
+	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
+	glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
 
-	//unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
-	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
-	//glBindVertexArray(0);
+	glBindVertexArray(m_VAO); 
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
+//	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 

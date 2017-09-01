@@ -1,3 +1,4 @@
 ﻿  Geo.cpp
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)
