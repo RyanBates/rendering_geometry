@@ -1,6 +1,3 @@
-﻿  main.cpp
-  Geo.cpp
-c:\users\bates\desktop\rendering_geometry\dep\glm\gtx\scalar_multiplication.hpp(85): error C2719: 'rh': formal parameter with requested alignment of 16 won't be aligned
-c:\users\bates\desktop\rendering_geometry\dep\glm\gtx\scalar_multiplication.hpp(85): error C2719: 'lh': formal parameter with requested alignment of 16 won't be aligned
-c:\users\bates\desktop\rendering_geometry\rendering_geometry\geo.cpp(43): warning C4316: 'Vertex': object allocated on the heap may not be aligned 16
-  Generating Code...
+﻿  Geo.cpp
+  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
+  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)

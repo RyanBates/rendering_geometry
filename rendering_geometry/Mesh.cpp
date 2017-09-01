@@ -1,7 +1,4 @@
-#include <iostream>
 #include "Mesh.h"
-#include "Geo.h"
-#include <vector>
 using namespace std;
 
 Mesh::Mesh()

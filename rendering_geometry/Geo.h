@@ -1,28 +1,25 @@
 #pragma once
+#include <Application.h>
+#include <glm\glm.hpp>
+using namespace glm;
 
-
-struct Vertex
-{
+struct Vertex {
 	vec4 Position;
 	vec4 Color;
 };
 
-class Geo
+class Geo : public Application
 {
 public:
 	Geo();
 	~Geo();
 
 	void generateGrid(unsigned int rows, unsigned int cols);
-	virtual void startup();
-	virtual void shutdown();
-	virtual void update(float);
-	virtual void draw();
-
-	void run();
-	void main();
-
-
+	void startup();
+	void shutdown();
+	void update(float);
+	void draw();
+		
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
@@ -32,7 +29,7 @@ public:
 	unsigned int rows;
 	unsigned int cols;
 
-	const float* m_projectionViewUniform;
+	mat4 m_projectionViewUniform;
 
 };
 

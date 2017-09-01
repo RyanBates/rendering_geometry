@@ -1,4 +1,9 @@
 #pragma once
+#include "Geo.h"
+#include <vector>
+#include <glm\glm.hpp>
+
+
 class Mesh
 {
 public:
@@ -7,7 +12,7 @@ public:
 
 
 	void create_buffers();
-	void initialize(vector<Vertex>&verts, vector<unsigned int>&indices);
+	void initialize(std::vector<Vertex>&verts, std::vector<unsigned int>&indices);
 
 	void bind();
 	void unbind();
@@ -21,11 +26,8 @@ protected:
 	unsigned int m_vbo;
 	unsigned int m_ibo;
 
-
-
-private:
-	vector<unsigned int>m_indices;
-	vector<Vertex> m_vertices;
+	std::vector<unsigned int>m_indices;
+	std::vector<Vertex> m_vertices;
 
 
 };

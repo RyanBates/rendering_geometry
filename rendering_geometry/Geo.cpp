@@ -1,34 +1,19 @@
 #include "Geo.h"
 #include "gl_core_4_4.h"
-#include <glfw\include\GLFW\glfw3.h>
 #include <stdio.h>
 #include <assert.h>
 #include <glm\ext.hpp>
 #include <glm\fwd.hpp>
-#include <glm\glm.hpp>
-
-using namespace glm;
-
-
-IN vec4 pos;
-IN vec4 colour;
-
-OUT vec4 vColour;
-
-mat4 projectionViewWorldMatrix;
-
-float times;
-float heightScale;
+#include <imgui.h>
+#include <imgui_impl_glfw_gl3.h>
 
 Geo::Geo()
 {
 }
 
-
 Geo::~Geo()
 {
 }
-
 void Geo::generateGrid(unsigned int rows, unsigned int cols)
 {
 	//this is what gives the color to the objects.
@@ -37,13 +22,12 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	for (unsigned int r = 0; r < rows; ++r)
 		for (unsigned int c = 0; c < cols; ++c)
 		{
-			aoVertices[r*cols + c].Position = vec4((float)c, 0, (float)r, 1);
+			aoVertices[r * cols + c].Position = vec4((float)c, 0, (float)r, 1);
 			// create some arbitrary colour based off something
 			// that might not be related to tiling a texture
 			vec3 colour = vec3(sinf((c / (float)(cols - 1))* (r / (float)(rows - 1))));
 			aoVertices[r * cols + c].Color = vec4(colour, 1);
 		}
-
 
 	//this is what will give the points to the trangles.
 	unsigned int* auiIndices = new unsigned int[(rows - 1) * (cols - 1) * 6];
@@ -64,14 +48,12 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 
 	//generates the Vertex Buffer Object
 	glGenBuffers(1, &m_VBO);
-	glGenBuffers(1, &m_VBO);
-	glGenBuffers(1, &m_IBO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, (rows * cols) * sizeof(Vertex), aoVertices, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(vec4)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -79,14 +61,18 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	//generates the Index Buffer Object
 	glGenBuffers(1, &m_IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
+
 
 	glGenVertexArrays(1, &m_VAO);
 
 	glBindVertexArray(m_VAO);
 
 	//code to bind VBO & IBO.
+	glGenBuffers(1, &m_VBO);
+	glGenBuffers(1, &m_IBO);
+
 	glBindBuffer(m_VBO, m_IBO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -96,19 +82,26 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 	delete[] auiIndices;
 }
 
+/*
+unknown pre-processor directive #version410
+syntax error, unexpected'<', expecting ::
+out cant be used with no-varying vColor
+incompatible options for link
+*/
+
 void Geo::startup()
 {
-	const char* vsSource = "#version410\n \
+	const char* vsSource = "#version 410\n \
 							layout(location=0) in vec4 Pos; \
 							layout(location=1) in vec4 Color; \
-							out vec4 vColor; \
+							out vec4 vColour; \
 							uniform mat4 projectionViewWorldMatrix; \
-							void main(){vColor = Color; gl_Position = projectionViewWorldMatrix * Pos;}";
+							void main(){vColour = Color; gl_Position = projectionViewWorldMatrix * Pos;}";
 
 	const char* fsSource = "#version 410\n \
-							in vec4 vColor; \
+							in vec4 vColour; \
 							out vec4 fragColor; \
-							void main(){fragColor = vColor;}";
+							void main(){fragColor = vColour;}";
 
 	int success = GL_FALSE;
 
@@ -142,42 +135,37 @@ void Geo::startup()
 	glDeleteShader(fragmentShader);
 	glDeleteShader(vertexShader);
 
-	generateGrid(10, 10);
+	//generateGrid(10, 10);
 }
 
-void Geo::shutdown()
+
+void Geo::draw()
 {
+	ImGui_ImplGlfwGL3_NewFrame();
+	ImGui::Begin("window");
+	ImGui::Text("hello world");
+	ImGui::End();
+	//glUseProgram(m_programID);
+	//unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
+	//glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
+
+	//glBindVertexArray(m_VAO); 
+
+	//unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
+	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	//glBindVertexArray(0);
+
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
+
+
 
 void Geo::update(float)
 {
 }
 
-void Geo::draw()
+
+
+void Geo::shutdown()
 {
-	glUseProgram(m_programID);
-	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
-	glUniformMatrix4fv(projectionViewUniform, 1, false, m_projectionViewUniform);
-
-	glBindVertexArray(m_VAO);
-
-	unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
-	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-}
-
-void Geo::run()
-{
-}
-
-
-void Geo::main()
-{
-
-	vColour = colour;
-	vec4 P = pos;
-	P.y += sin(times + pos.x) * heightScale;
-
 }
