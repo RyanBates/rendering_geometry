@@ -29,14 +29,6 @@ Geo::~Geo()
 {
 }
 
-
-struct Vertex
-{
-	vec4 Position;
-	vec4 Color;
-};
-
-
 void Geo::generateGrid(unsigned int rows, unsigned int cols)
 {
 	//this is what gives the color to the objects.

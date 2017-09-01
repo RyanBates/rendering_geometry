@@ -1,5 +1,12 @@
 #pragma once
 
+
+struct Vertex
+{
+	vec4 Position;
+	vec4 Color;
+};
+
 class Geo
 {
 public:
