@@ -27,6 +27,9 @@
     <ClCompile Include="Geo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_core_4_4.h">
@@ -38,10 +41,13 @@
     <ClInclude Include="Geo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\aiebootstrap\bootstrap\include\Application.h">
+    <ClInclude Include="Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\aiebootstrap\bootstrap\include\Camera.h">
+    <ClInclude Include="..\dep\bootstrap\include\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dep\bootstrap\include\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
