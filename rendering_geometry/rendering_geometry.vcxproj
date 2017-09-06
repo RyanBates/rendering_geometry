@@ -26,8 +26,8 @@
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\aiebootstrap\bootstrap\include\Application.h" />
-    <ClInclude Include="..\aiebootstrap\bootstrap\include\Camera.h" />
+    <ClInclude Include="..\dep\bootstrap\include\Application.h" />
+    <ClInclude Include="..\dep\bootstrap\include\Camera.h" />
     <ClInclude Include="Geo.h" />
     <ClInclude Include="gl_core_4_4.h" />
     <ClInclude Include="Mesh.h" />
@@ -95,7 +95,7 @@
     </ClCompile>
     <Link />
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;bootstrap.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;bootstrap.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

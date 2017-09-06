@@ -11,10 +11,10 @@
 Geo::Geo()
 {
 }
-
 Geo::~Geo()
 {
 }
+
 void Geo::generateGrid(unsigned int rows, unsigned int cols)
 {
 	//this is what gives the color to the objects.
@@ -158,7 +158,7 @@ void Geo::draw()
 	glBindVertexArray(m_VAO); 
 
 	unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
-//	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	//	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
