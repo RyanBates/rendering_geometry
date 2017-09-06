@@ -1,5 +1,5 @@
 #include "Shader.h"
-
+#include <cstring>
 
 
 Shader::Shader()
@@ -8,8 +8,6 @@ Shader::Shader()
 Shader::~Shader()
 {
 }
-
-
 
 void Shader::bind()
 {
@@ -23,6 +21,7 @@ void Shader::unbind()
 
 void Shader::load(const char * filename, unsigned int type)
 {
+
 
 }
 

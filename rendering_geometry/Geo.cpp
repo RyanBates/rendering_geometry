@@ -145,11 +145,10 @@ void Geo::startup()
 void Geo::draw()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
-	ImGui::Begin("window");
-	ImGui::Text("hello world");
+	ImGui::Begin("nope");
 	ImGui::End();
 	
-	generateGrid(10, 10);
+	
 
 	glUseProgram(m_programID);
 	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
@@ -161,7 +160,32 @@ void Geo::draw()
 	//	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
+
+	//draw triangle
+
+
+
+
+
+
+	//draw square
+
+
+
+
+
+
+	//draw half circle
+
+
+
+
+
+
+	//draw ball
+
+
 }
 
 

@@ -4,8 +4,6 @@ using namespace std;
 Mesh::Mesh()
 {
 }
-
-
 Mesh::~Mesh()
 {
 }

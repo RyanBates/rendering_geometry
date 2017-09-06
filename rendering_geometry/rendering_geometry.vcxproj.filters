@@ -51,4 +51,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bin\Shaders\defaultFrag.frag" />
+    <None Include="..\bin\Shaders\defaultVert.vert" />
+  </ItemGroup>
 </Project>
