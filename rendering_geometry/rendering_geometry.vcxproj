@@ -23,6 +23,7 @@
     <ClCompile Include="gl_core_4_4.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\aiebootstrap\bootstrap\include\Application.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="Geo.h" />
     <ClInclude Include="gl_core_4_4.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{02C3FBDA-7488-4692-825E-FBB447A8C5F1}</ProjectGuid>
@@ -91,8 +93,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link />
     <Link>
-      <AdditionalDependencies>glfw3.lib;bootstrap.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;bootstrap.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
