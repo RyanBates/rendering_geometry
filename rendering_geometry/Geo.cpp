@@ -152,36 +152,26 @@ void Geo::rotatePoints()
 
 vector<vec4> GenHalfCircle(int r = 2, int np = 3)
 {
-	vec4 start = vec4(0);
-
 	float angle = PI / (np - 1);
 
 	for(int i = 0; i < np; i++)
 	{
-
-
-		start.x = r * cos(angle);
-		start.y = r * sin(angle);
-		start.z = 0;
-		start.w = 1.0f;
+		
 	}
-
+	
 	return GenHalfCircle();
 }
 
 vector<vec4> GenSphere(int nm = 4)
 {
-
-	
-
 	for (int i = 0; i < nm; ++i)
 	{
-		float slice = nm - 1;
-		float phi = (2 * PI) / slice;
+		float slice = (2 * PI) / nm - 1;
+		float phi = i / slice;
 
 		for (int j = 0; j < slice; ++j)
 		{
-
+			
 		}
 
 	}
