@@ -1,3 +1,11 @@
 ﻿  Geo.cpp
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(179): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(170): warning C4717: 'GenHalfCircle': recursive on all control paths, function will cause runtime stack overflow
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(191): warning C4717: 'GenSphere': recursive on all control paths, function will cause runtime stack overflow
+  Skipping... (no relevant changes detected)
+  main.cpp
+  Mesh.cpp
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)

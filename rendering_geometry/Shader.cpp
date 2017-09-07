@@ -1,6 +1,6 @@
 #include "Shader.h"
 #include <cstring>
-
+#include "gl_core_4_4.h"
 
 Shader::Shader()
 {
@@ -21,7 +21,7 @@ void Shader::unbind()
 
 void Shader::load(const char * filename, unsigned int type)
 {
-
+	glUseProgram(m_program);
 
 }
 

@@ -2,6 +2,7 @@
 #include <Application.h>
 #include <glm\glm.hpp>
 using namespace glm;
+using namespace std;
 
 struct Vertex {
 	vec4 Position;
@@ -19,7 +20,9 @@ public:
 	void shutdown();
 	void update(float);
 	void draw();
-		
+	void rotatePoints();
+
+
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;

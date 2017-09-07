@@ -8,6 +8,9 @@
 #include <imgui_impl_glfw_gl3.h>
 #include <vector>
 
+float PI = 3.14159265359;
+
+
 Geo::Geo()
 {
 }
@@ -141,49 +144,111 @@ void Geo::startup()
 
 }
 
+void Geo::rotatePoints()
+{
+
+
+}
+
+vector<vec4> GenHalfCircle(int r = 2, int np = 3)
+{
+	vec4 start = vec4(0);
+
+	float angle = PI / (np - 1);
+
+	for(int i = 0; i < np; i++)
+	{
+
+
+		start.x = r * cos(angle);
+		start.y = r * sin(angle);
+		start.z = 0;
+		start.w = 1.0f;
+	}
+
+	return GenHalfCircle();
+}
+
+vector<vec4> GenSphere(int nm = 4)
+{
+
+	
+
+	for (int i = 0; i < nm; ++i)
+	{
+		float slice = nm - 1;
+		float phi = (2 * PI) / slice;
+
+		for (int j = 0; j < slice; ++j)
+		{
+
+		}
+
+	}
+
+	return GenSphere();
+
+}
+
+
 
 void Geo::draw()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	ImGui::Begin("nope");
 	ImGui::End();
-	
-	
 
 	glUseProgram(m_programID);
+
 	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
+
 	glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
 
 	glBindVertexArray(m_VAO); 
 
 	unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
-	//	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+
+	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	
 	glBindVertexArray(0);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
-
-	//draw triangle
-
-
-
-
-
-
-	//draw square
+	
+	/// draw triangle
 
 
 
 
 
 
-	//draw half circle
+	/// draw square
 
 
 
 
 
 
-	//draw ball
+	/// draw half circle
+	//glBindVertexArray(m_VAO);
+
+
+
+	//glDrawElements(GL_TRIANGLE_STRIP, indexCount, GL_UNSIGNED_INT, 0);
+
+
+
+	//glBindVertexArray(0);
+
+
+
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLE_STRIP);
+
+	/// draw sphere
+
+	
+
+
+
 
 
 }
