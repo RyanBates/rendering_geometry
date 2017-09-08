@@ -20,8 +20,9 @@ public:
 	void shutdown();
 	void update(float);
 	void draw();
-	void rotatePoints();
 
+	vector<vec4> GenHalfCircle(int, int);
+	vector<vec4> GenSphere(vector<vec4>, int);
 
 	unsigned int m_VAO;
 	unsigned int m_VBO;

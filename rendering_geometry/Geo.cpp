@@ -7,6 +7,7 @@
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
 #include <vector>
+#include "Shader.h"
 
 float PI = 3.14159265359;
 
@@ -88,49 +89,6 @@ void Geo::generateGrid(unsigned int rows, unsigned int cols)
 
 void Geo::startup()
 {
-	const char* vsSource = "#version 410\n \
-							layout(location=0) in vec4 Pos; \
-							layout(location=1) in vec4 Color; \
-							out vec4 vColour; \
-							uniform mat4 projectionViewWorldMatrix; \
-							void main(){vColour = Color; gl_Position = projectionViewWorldMatrix * Pos;}";
-
-	const char* fsSource = "#version 410\n \
-							in vec4 vColour; \
-							out vec4 fragColor; \
-							void main(){fragColor = vColour;}";
-
-	int success = GL_FALSE;
-
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	glShaderSource(vertexShader, 1, (const char**)&vsSource, 0);
-	glCompileShader(vertexShader);
-	glShaderSource(fragmentShader, 1, (const char**)&fsSource, 0);
-	glCompileShader(fragmentShader);
-
-	m_programID = glCreateProgram();
-
-	glAttachShader(m_programID, vertexShader);
-	glAttachShader(m_programID, fragmentShader);
-	glLinkProgram(m_programID);
-
-	glGetProgramiv(m_programID, GL_LINK_STATUS, &success);
-	if (success == GL_FALSE)
-	{
-		int infoLogLength = 0;
-		glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &infoLogLength);
-		char* infoLog = new char[infoLogLength];
-
-		glGetProgramInfoLog(m_programID, infoLogLength, 0, infoLog);
-		printf("Error: failed to link shader program! \n");
-		printf("%s\n", infoLog);
-		delete[] infoLog;
-	}
-
-	glDeleteShader(fragmentShader);
-	glDeleteShader(vertexShader);
 
 	Vertex a = { glm::vec4(-5,  0, 0, 1)		, glm::vec4(.1, .1, .1, 1) };//bl	
 	Vertex b = { glm::vec4(5,  0, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//br
@@ -144,42 +102,45 @@ void Geo::startup()
 
 }
 
-void Geo::rotatePoints()
+vector<vec4> Geo::GenHalfCircle(int r = 2, int np = 3)
 {
+	vector<vec4> half = vector<vec4>(np);
 
+ 	float angle = PI / (np - 1);
 
-}
-
-vector<vec4> GenHalfCircle(int r = 2, int np = 3)
-{
-	float angle = PI / (np - 1);
-
-	for(int i = 0; i < np; i++)
+	for (int i = 0; i < np; i++)
 	{
-		
+		half[i].x = sin(angle) * r;
+		half[i].y = cos(angle) * r;
+		half[i].z = 0.f;
+		half[i].w = 1.f;
 	}
-	
-	return GenHalfCircle();
+
+	return half;
 }
 
-vector<vec4> GenSphere(int nm = 4)
+vector<vec4> Geo::GenSphere(vector<vec4> np, int nm = 4)
 {
+	vector<vec4> sphere;
+
 	for (int i = 0; i < nm; ++i)
 	{
 		float slice = (2 * PI) / nm - 1;
 		float phi = i / slice;
 
-		for (int j = 0; j < slice; ++j)
+		for (int j = 0; j < np.size; ++j)
 		{
-			
+			float newX = np[j].x * sin(phi);
+			float newY = np[j].y * cos(phi);
+			float newZ = np[j].z;
+						
+			sphere.push_back(vec4(newX, newY, newZ, 1.f));
 		}
 
 	}
 
-	return GenSphere();
-
+	return sphere;
 }
-
 
 
 void Geo::draw()

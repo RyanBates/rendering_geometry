@@ -2,7 +2,9 @@
   Mesh.cpp
   main.cpp
   Geo.cpp
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\bates\desktop\rendering_geometry\rendering_geometry\geo.cpp(11): warning C4305: 'initializing': truncation from 'double' to 'float'
   Generating Code...
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(161): error C4716: 'GenHalfCircle': must return a value
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(179): warning C4717: 'GenSphere': recursive on all control paths, function will cause runtime stack overflow
+c:\users\bates\desktop\rendering_geometry\rendering_geometry\geo.cpp(163): warning C4717: 'GenHalfCircle': recursive on all control paths, function will cause runtime stack overflow
+c:\users\bates\desktop\rendering_geometry\rendering_geometry\geo.cpp(181): warning C4717: 'GenSphere': recursive on all control paths, function will cause runtime stack overflow
+  gl_core_4_4.c
+LINK : fatal error LNK1104: cannot open file 'glfw3.lib'
