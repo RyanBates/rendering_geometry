@@ -1,6 +1,9 @@
 #pragma once
 #include <Application.h>
 #include <glm\glm.hpp>
+class Shader;
+
+
 using namespace glm;
 using namespace std;
 
@@ -21,10 +24,10 @@ public:
 	void update(float);
 	void draw();
 
-	vector<vec4> GenHalfCircle(int, int);
-	vector<vec4> GenSphere(vector<vec4>, int);
+	//vector<vec4> GenHalfCircle(unsigned int, unsigned int);
+	//vector<vec4> GenSphere(vector<vec4>, unsigned int);
 
-	unsigned int m_VAO;
+	unsigned int m_Plane_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
 
@@ -34,6 +37,7 @@ public:
 	unsigned int cols;
 
 	mat4 m_projectionViewUniform;
-
+	Shader * m_shader;
+	Shader& TheShader;
 };
 

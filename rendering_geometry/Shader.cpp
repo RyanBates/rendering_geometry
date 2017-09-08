@@ -24,6 +24,7 @@ void Shader::unbind()
 
 void Shader::load(const char * filename, unsigned int type)
 {
+
 	
 }
 
@@ -52,27 +53,27 @@ void Shader::attach()
 
 void Shader::defaultLoad()
 {
-	const char* vsSource = "#version 410\n \
+	m_vsSource = "#version 410\n \
 							layout(location=0) in vec4 Pos; \
 							layout(location=1) in vec4 Color; \
 							out vec4 vColour; \
-							uniform mat4 projectionViewWorldMatrix; \
-							void main(){vColour = Color; gl_Position = projectionViewWorldMatrix * Pos;}";
+							uniform mat4 mvp; \
+							void main(){vColour = Color; gl_Position = mvp * Pos;}";
 
-	const char* fsSource = "#version 410\n \
+	m_fsSource = "#version 410\n \
 							in vec4 vColour; \
 							out vec4 fragColor; \
 							void main(){fragColor = vColour;}";
 
-	int success = GL_FALSE;
+	
 
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	m_vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	m_fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-	glShaderSource(vertexShader, 1, (const char**)&vsSource, 0);
-	glCompileShader(vertexShader);
-	glShaderSource(fragmentShader, 1, (const char**)&fsSource, 0);
-	glCompileShader(fragmentShader);
+	glShaderSource(m_vertexShader, 1, (const char**)&m_vsSource, 0);
+	glCompileShader(m_vertexShader);
+	glShaderSource(m_fragmentShader, 1, (const char**)&m_fsSource, 0);
+	glCompileShader(m_fragmentShader);
 }
 
 unsigned int Shader::getUniform(const char* name)

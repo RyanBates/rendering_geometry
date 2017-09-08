@@ -15,8 +15,8 @@ public:
 	unsigned int getUniform(const char *);
 	unsigned int m_vertexShader;
 	unsigned int m_fragmentShader;
-	const char* vsSource;
-	const char* fsSource;
+	const char* m_vsSource;
+	const char* m_fsSource;
 
 
 private:

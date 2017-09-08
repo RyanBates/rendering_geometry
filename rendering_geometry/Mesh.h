@@ -16,15 +16,18 @@ public:
 
 	void bind();
 	void unbind();
-	unsigned int index_count;
-	unsigned int vertex_count;
+	unsigned int m_index_count;
+	unsigned int m_vertex_count;
 
 
 
 protected:
-	unsigned int m_vao;
-	unsigned int m_vbo;
-	unsigned int m_ibo;
+	unsigned int m_VAO;
+	unsigned int m_VBO;
+	unsigned int m_IBO;
+
+	unsigned int rows;
+	unsigned int cols;
 
 	std::vector<unsigned int>m_indices;
 	std::vector<Vertex> m_vertices;
