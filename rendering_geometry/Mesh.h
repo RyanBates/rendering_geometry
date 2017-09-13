@@ -3,13 +3,16 @@
 #include <vector>
 #include <glm\glm.hpp>
 
+struct Vertex {
+	vec4 Position;
+	vec4 Color;
+};
 
 class Mesh
 {
 public:
 	Mesh();
 	~Mesh();
-
 
 	void create_buffers();
 	void initialize(std::vector<Vertex>&verts, std::vector<unsigned int>&indices);

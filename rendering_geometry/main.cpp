@@ -7,6 +7,6 @@ int main()
 	Application* app = new Geo();
 
 	app->run("pls work", 1600, 900, false);
-		
-	return 0;
+
+	return 0;	
 }

@@ -2,15 +2,13 @@
 #include <Application.h>
 #include <glm\glm.hpp>
 class Shader;
-
+class Mesh;
+class Vertex;
 
 using namespace glm;
 using namespace std;
 
-struct Vertex {
-	vec4 Position;
-	vec4 Color;
-};
+
 
 class Geo : public Application
 {
@@ -27,7 +25,7 @@ public:
 	//vector<vec4> GenHalfCircle(unsigned int, unsigned int);
 	//vector<vec4> GenSphere(vector<vec4>, unsigned int);
 
-	unsigned int m_Plane_VAO;
+	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
 
@@ -39,5 +37,6 @@ public:
 	mat4 m_projectionViewUniform;
 	Shader * m_shader;
 	Shader& TheShader;
+	Mesh* m_mesh;
 };
 

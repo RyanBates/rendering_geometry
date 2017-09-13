@@ -15,6 +15,7 @@ float PI = 3.14159265359;
 
 Geo::Geo() : TheShader(*m_shader)
 {
+	m_mesh;
 }
 Geo::~Geo()
 {
@@ -101,9 +102,6 @@ vector<vec4> GenSphere(vector<vec4> np, int nm)
 	return sphere;
 }
 
-
-
-
 void Geo::startup()
 {
 	// matthew's vetices and indices
@@ -131,30 +129,39 @@ void Geo::startup()
 	//ball Vertices and indices
 	//GenSphere(vector<vec4>(0.f,0.f,0.f,0.f), 4);
 
+	//make a vertex array for data then have ver and uints take in that data.
+
+
+	vector<Vertex> ver;
+	vector<unsigned int> uints;
+
+	m_mesh->create_buffers();
+	m_mesh->initialize(ver, uints);
 }
 
 void Geo::draw()
 {
-	ImGui_ImplGlfwGL3_NewFrame();
-	ImGui::Begin("nope");
-	ImGui::End();
-
-	m_shader->bind();
-		unsigned int projectionViewUniform = m_shader->getUniform("mvp");
-			glBindVertexArray(m_Plane_VAO);
-			glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
-			glDrawElements(GL_TRIANGLES, (rows - 1) * (cols - 1), GL_UNSIGNED_INT, 0);
-			//glBindVertexArray(0);
-	m_shader->unbind();
+	//ImGui_ImplGlfwGL3_NewFrame();
+	//ImGui::Begin("nope");
+	//ImGui::End();
 
 
+		m_shader->bind();
+			unsigned int projectionViewUniform = m_shader->getUniform("mvp");
+				glBindVertexArray(m_VAO);
+				glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
+				glDrawElements(GL_TRIANGLES, m_mesh->m_vertex_count, GL_UNSIGNED_INT, 0);
+				glBindVertexArray(0);
+		m_shader->unbind();
+	//m_mesh->unbind();
+		
 
 	
 
 	//unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
 
 	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
-	//
+
 	//glBindVertexArray(0);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
@@ -189,8 +196,6 @@ void Geo::draw()
 
 
 }
-
-
 
 void Geo::update(float)
 {
