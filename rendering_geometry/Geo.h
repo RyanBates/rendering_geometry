@@ -33,6 +33,7 @@ public:
 	unsigned int cols;
 
 	mat4 m_projectionViewUniform;
+
 	Shader * m_shader;
 	Shader& TheShader;
 	Mesh* m_mesh;

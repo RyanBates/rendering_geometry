@@ -1,11 +1,7 @@
-﻿  Geo.cpp
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(13): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(76): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(77): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(78): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(79): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(94): warning C4018: '<': signed/unsigned mismatch
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(116): warning C4018: '<': signed/unsigned mismatch
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(120): warning C4018: '<': signed/unsigned mismatch
-  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
-  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)
+﻿LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+bootstrap.lib(imgui.obj) : warning LNK4099: PDB 'bootstrap.pdb' was not found with 'bootstrap.lib(imgui.obj)' or at 'C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\bootstrap.pdb'; linking object as if no debug info
+bootstrap.lib(imgui_draw.obj) : warning LNK4099: PDB 'bootstrap.pdb' was not found with 'bootstrap.lib(imgui_draw.obj)' or at 'C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\bootstrap.pdb'; linking object as if no debug info
+bootstrap.lib(Application.obj) : warning LNK4099: PDB 'bootstrap.pdb' was not found with 'bootstrap.lib(Application.obj)' or at 'C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\bootstrap.pdb'; linking object as if no debug info
+bootstrap.lib(imgui_impl_glfw_gl3.obj) : warning LNK4099: PDB 'bootstrap.pdb' was not found with 'bootstrap.lib(imgui_impl_glfw_gl3.obj)' or at 'C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\bootstrap.pdb'; linking object as if no debug info
+  rendering_geometry.vcxproj -> C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
+  rendering_geometry.vcxproj -> C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)

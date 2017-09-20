@@ -141,6 +141,7 @@ void Geo::startup()
 
 	//loading from the shader class
 	m_shader = new Shader();
+	m_mesh = new Mesh();
 	m_shader->defaultLoad();
 	m_shader->attach();
 
@@ -206,23 +207,19 @@ void Geo::draw()
 
 	unsigned int projectionViewUniform = m_shader->getUniform("mvp");
 
-	glBindVertexArray(m_mesh->m_VAO);
+	m_mesh->bind();
 
 	glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
 
-	m_mesh->bind();
+	
 
-	glDrawElements(GL_TRIANGLE_STRIP, m_mesh->m_index_count, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, m_mesh->m_index_count, GL_UNSIGNED_INT, 0);
 
 	m_mesh->unbind();
-
-	glBindVertexArray(0);
 
 	m_shader->unbind();	
 
 	/// draw triangle
-
-
 
 
 
