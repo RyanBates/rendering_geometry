@@ -22,4 +22,3 @@ public:
 private:
 	unsigned int m_program;
 };
-

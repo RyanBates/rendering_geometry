@@ -6,6 +6,7 @@
 Shader::Shader()
 {	
 }
+
 Shader::~Shader()
 {
 }

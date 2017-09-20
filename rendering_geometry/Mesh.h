@@ -14,27 +14,21 @@ public:
 	Mesh();
 	~Mesh();
 
-	void create_buffers();
 	void initialize(std::vector<Vertex>&verts, std::vector<unsigned int>&indices);
+	void create_buffers();
 
 	void bind();
 	void unbind();
 	unsigned int m_index_count;
 	unsigned int m_vertex_count;
 
-
-
-protected:
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
 
-	unsigned int rows;
-	unsigned int cols;
-
+protected:
 	std::vector<unsigned int>m_indices;
 	std::vector<Vertex> m_vertices;
 
 
 };
-

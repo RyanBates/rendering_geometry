@@ -3,12 +3,10 @@
 #include <glm\glm.hpp>
 class Shader;
 class Mesh;
-class Vertex;
+struct Vertex;
 
 using namespace glm;
 using namespace std;
-
-
 
 class Geo : public Application
 {
@@ -25,9 +23,9 @@ public:
 	//vector<vec4> GenHalfCircle(unsigned int, unsigned int);
 	//vector<vec4> GenSphere(vector<vec4>, unsigned int);
 
-	unsigned int m_VAO;
-	unsigned int m_VBO;
-	unsigned int m_IBO;
+	//unsigned int m_VAO;
+	//unsigned int m_VBO;
+	//unsigned int m_IBO;
 
 	unsigned int m_programID;
 
@@ -39,4 +37,3 @@ public:
 	Shader& TheShader;
 	Mesh* m_mesh;
 };
-

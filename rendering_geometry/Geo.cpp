@@ -13,9 +13,9 @@
 float PI = 3.14159265359;
 
 
-Geo::Geo() : TheShader(*m_shader)
+Geo::Geo() : TheShader(*m_shader), m_mesh(0)
 {
-	m_mesh;
+	m_mesh = new Mesh();
 }
 Geo::~Geo()
 {
@@ -66,12 +66,15 @@ vector<vec4> generateHalfCircle(int r, int np)
 {
 	vector<vec4> half = vector<vec4>(np);
 
-	float angle = PI / (np - 1);
-
-	for (int i = 0; i < np; i++)
+	for (float i = 0; i < np; i++)
 	{
-		half[i].x = sin(angle) * r;
-		half[i].y = cos(angle) * r;
+		float angle = PI / (np - 1);
+
+		float theta = angle* i;
+
+
+		half[i].x = sin(theta) * r;
+		half[i].y = cos(theta) * r;
 		half[i].z = 0.f;
 		half[i].w = 1.f;
 	}
@@ -79,7 +82,7 @@ vector<vec4> generateHalfCircle(int r, int np)
 	return half;
 }
 
-vector<vec4> GenSphere(vector<vec4> np, int nm)
+vector<vec4> genSphere(vector<vec4> np, int nm)
 {
 	vector<vec4> sphere;
 
@@ -90,9 +93,9 @@ vector<vec4> GenSphere(vector<vec4> np, int nm)
 
 		for (int j = 0; j < np.size(); ++j)
 		{
-			float newX = np[j].x * sin(phi);
-			float newY = np[j].y * cos(phi);
-			float newZ = np[j].z;
+			float newX = np[j].x * sin(phi) * np[j].z * cos(phi);
+			float newY = np[j].y;
+			float newZ = np[j].z* cos(phi) * np[j].x * sin(phi);
 
 			sphere.push_back(vec4(newX, newY, newZ, 1.f));
 		}
@@ -102,70 +105,121 @@ vector<vec4> GenSphere(vector<vec4> np, int nm)
 	return sphere;
 }
 
+vector<unsigned int> sphereIndinces(unsigned int nm, unsigned int np)
+{
+	vector<unsigned int> rotate;
+
+	unsigned int start;
+	unsigned int botLeft;
+	unsigned int botRight;
+
+	for (int i = 0; i < nm; i++)
+	{
+		start = i * np;
+
+		for (int j = 0; j < np; j++)
+		{
+			botLeft = start + j;
+			botRight = botLeft + np;
+			rotate.push_back(botLeft);
+			rotate.push_back(botRight);
+		}
+		rotate.push_back(0xFFFF);
+	}
+
+	return rotate;
+}
+
 void Geo::startup()
 {
-	// matthew's vetices and indices
-	//Vertex a = { glm::vec4(-5,  0, 0, 1)		, glm::vec4(.1, .1, .1, 1) };//bl	
-	//Vertex b = { glm::vec4(5,  0, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//br
-	//Vertex c = { glm::vec4(5, -5, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//tl
-	//Vertex d = { glm::vec4(-5, -5, 0, 1)		, glm::vec4(1, 0, 0, 1) };//tr
-	//Vertex e = { glm::vec4(-5,  5, 0, 1)		, glm::vec4(0, 0, 1, 1) };//tr	
 
-	//std::vector<Vertex> vertices{ a,b,c,d,e };
-	//std::vector<unsigned int> indices{ 0, 1, 2, 0, 2, 3, 0, 4, 1 };
-	rows = 3;
-	cols = rows;
-	//half circle
-	generateHalfCircle(2, 3);
-
-	generateGrid(rows, cols);
-	m_shader = new Shader();
-	m_shader->defaultLoad();
-	m_shader->attach();
 	auto eye = vec3(10, 10, 10);
 	auto projection = perspective(quarter_pi<float>(), 16 / 9.f, .1f, 1000.f);
 	auto view = glm::lookAt(eye, vec3(0), vec3(0, 1, 0));
 	m_projectionViewUniform = view * projection;
-	//ball Vertices and indices
-	//GenSphere(vector<vec4>(0.f,0.f,0.f,0.f), 4);
-
-	//make a vertex array for data then have ver and uints take in that data.
 
 
+	//loading from the shader class
+	m_shader = new Shader();
+	m_shader->defaultLoad();
+	m_shader->attach();
+
+
+	//this is to populate 
 	vector<Vertex> ver;
 	vector<unsigned int> uints;
+	
+	////matthew's vetices and indices
+	//Vertex a = { glm::vec4(-5,  0, 0, 1)		, glm::vec4(.1, .1, .1, 1) };//bl
+	//Vertex b = { glm::vec4(5,  0, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//br
+	//Vertex c = { glm::vec4(5, -5, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//tl
+	//Vertex d = { glm::vec4(-5, -5, 0, 1)		, glm::vec4(1, 0, 0, 1) };//tr
+	//Vertex e = { glm::vec4(-5,  5, 0, 1)		, glm::vec4(0, 0, 1, 1) };//tr
 
-	m_mesh->create_buffers();
+	//std::vector<Vertex> vertices{ a,b,c,d,e };
+	//std::vector<unsigned int> indices{ 0, 1, 2, 0, 2, 3, 0, 4, 1 };
+
+	//rows = 3;
+	//cols = rows;
+	//generateGrid(rows, cols);
+
+
+	/// indinces for plane
+
+
+
+
+	/// indinces for cube
+
+
+
+
+	/// indinces for sphere
+	int r = 10;
+	int np = r;
+	int nm = 4;
+
+	vector<vec4>halfcircle  =  generateHalfCircle(r, np); 
+
+	vector<vec4>sphere = genSphere(halfcircle, nm);
+
+	uints = sphereIndinces(nm, 3);
+	
+	for (auto p : sphere)
+	{
+		Vertex vert = { p, glm::vec4(.75, 0, .75, 1) };
+		ver.push_back(vert);
+	}
+	
 	m_mesh->initialize(ver, uints);
+	
 }
 
 void Geo::draw()
 {
-	//ImGui_ImplGlfwGL3_NewFrame();
-	//ImGui::Begin("nope");
-	//ImGui::End();
+	ImGui_ImplGlfwGL3_NewFrame();
+	ImGui::Begin("nope");
+	ImGui::End();
 
 
-		m_shader->bind();
-			unsigned int projectionViewUniform = m_shader->getUniform("mvp");
-				glBindVertexArray(m_VAO);
-				glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
-				glDrawElements(GL_TRIANGLES, m_mesh->m_vertex_count, GL_UNSIGNED_INT, 0);
-				glBindVertexArray(0);
-		m_shader->unbind();
-	//m_mesh->unbind();
-		
+	m_shader->bind();
 
-	
+	unsigned int projectionViewUniform = m_shader->getUniform("mvp");
 
-	//unsigned int indexCount = (rows - 1) * (cols - 1) * 6;
+	glBindVertexArray(m_mesh->m_VAO);
 
-	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	glUniformMatrix4fv(projectionViewUniform, 1, false, glm::value_ptr(m_projectionViewUniform));
 
-	//glBindVertexArray(0);
+	m_mesh->bind();
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
-	
+	glDrawElements(GL_TRIANGLE_STRIP, m_mesh->m_index_count, GL_UNSIGNED_INT, 0);
+
+	m_mesh->unbind();
+
+	glBindVertexArray(0);
+
+	m_shader->unbind();	
+
 	/// draw triangle
 
 
