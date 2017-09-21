@@ -240,10 +240,10 @@ void Geo::startup()
 
 	//loading from the shader class
 
-	//m_shader->load("./Shaders/phong.vert", GL_VERTEX_SHADER);
-	//m_shader->load("./Shaders/phong.frag", GL_FRAGMENT_SHADER);
+	shade->load("./Shaders/phong.vert", GL_VERTEX_SHADER);
+	shade->load("./Shaders/phong.frag", GL_FRAGMENT_SHADER);
 
-	shade->defaultLoad();
+	//shade->defaultLoad();
 	shade->attach();
 
 

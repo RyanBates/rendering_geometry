@@ -7,5 +7,6 @@ c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\render
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(97): warning C4018: '<': signed/unsigned mismatch
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(118): warning C4018: '<': signed/unsigned mismatch
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(122): warning C4018: '<': signed/unsigned mismatch
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)
