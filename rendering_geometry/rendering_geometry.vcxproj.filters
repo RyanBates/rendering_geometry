@@ -52,7 +52,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\bin\Shaders\defaultFrag.frag" />
-    <None Include="..\bin\Shaders\defaultVert.vert" />
+    <None Include="..\bin\Shaders\defaultFrag.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\bin\Shaders\defaultVert.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\bin\Shaders\phong.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\bin\Shaders\phong.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

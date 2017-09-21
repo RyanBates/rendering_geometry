@@ -4,10 +4,16 @@
 #include <glm\glm.hpp>
 
 struct Vertex {
-	vec4 Position;
-	vec4 Color;
+
+	vec4 position;
+	vec4 Colour;
+	vec4 normal;
+	vec4 tangent;
+	vec4 bitangent;
+	vec2 texcoord;
 };
 
+ 
 class Mesh
 {
 public:
