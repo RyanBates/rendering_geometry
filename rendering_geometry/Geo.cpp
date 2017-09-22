@@ -1,5 +1,3 @@
-
-
 #include "Geo.h"
 #include "gl_core_4_4.h"
 #include <stdio.h>
@@ -12,6 +10,7 @@
 #include <vector>
 #include "Shader.h"
 #include "Mesh.h"
+
 
 float PI = 3.14159265359;
 
@@ -204,6 +203,7 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 	// colors
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(glm::vec4)));
+
 	// normals
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)(sizeof(glm::vec4) * 2));
@@ -224,10 +224,9 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 	delete[] indices;
 	delete[] vertices;
 }
-unsigned VAO, VBO, IBO, INDEXCOUNT;
 void Geo::startup()
 {
-	auto eye = vec3(10, 10, 5);
+	auto eye = vec3(10, 0, 1);
 	auto center = vec3(0);
 	auto up = vec3(0, 1, 0);
 
@@ -268,9 +267,9 @@ void Geo::startup()
 	//vector<Vertex> ver;
 	//vector<unsigned int> uints;
 
-	//int r = 2;
-	//int np = 5;
-	//int nm = 4;
+	//int r = 10;
+	//int np = 10;
+	//int nm = 10;
 
 	//vector<vec4>halfcircle = generateHalfCircle(r, np);
 
@@ -280,10 +279,11 @@ void Geo::startup()
 
 	//for (auto p : sphere)
 	//{
-	//	Vertex vert = { p, vec4(.75f, 0, .75f, 1) };
+	//	Vertex vert = { p, vec4(0, 0, 0, 1) };
 	//	ver.push_back(vert);
 	//}
 
+	//mesh->create_buffers();
 	//mesh->initialize(ver, uints);
 
 	///matthew's call function
@@ -293,25 +293,25 @@ void Geo::startup()
 	generateSphere(i, j, mesh->m_VAO, mesh->m_VBO, mesh->m_IBO, mesh->m_index_count);
 }
 
+float specularPower = 10;
+
 void Geo::draw()
 {
-	
 	ImGui_ImplGlfwGL3_NewFrame();
+	ImGui::Begin("do it");
+	ImGui::SliderFloat("spec power", &specularPower, 10, 255);
+	ImGui::End();
+
 	shade->bind();
 	
 	unsigned handle = shade->getUniform("projectionViewWorldMatrix");
 	
-	glUniformMatrix4fv(handle, 1, false, value_ptr(m_projectionView));
-	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, INDEXCOUNT, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
-
-
 	mesh->bind();
 	auto trans = glm::mat4(1);
 	trans = translate(trans, vec3(0, 0, 0));
 	auto mvp = m_projectionView * trans;
 	glUniformMatrix4fv(handle, 1, false, value_ptr(mvp));
+	glUniform1f(shade->getUniform("specularPower"), specularPower);
 	glDrawElements(GL_TRIANGLES, mesh->m_index_count, GL_UNSIGNED_INT, 0);
 	mesh->unbind();
 	shade->unbind();
@@ -321,6 +321,7 @@ void Geo::draw()
 
 void Geo::update(float)
 {	
+	
 }
 
 void Geo::shutdown()

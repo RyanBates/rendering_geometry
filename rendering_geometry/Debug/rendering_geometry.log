@@ -1,12 +1,11 @@
 ﻿  Geo.cpp
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(78): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(79): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(80): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(81): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(82): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(97): warning C4018: '<': signed/unsigned mismatch
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(118): warning C4018: '<': signed/unsigned mismatch
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(122): warning C4018: '<': signed/unsigned mismatch
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(96): warning C4018: '<': signed/unsigned mismatch
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(121): warning C4018: '<': signed/unsigned mismatch
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)

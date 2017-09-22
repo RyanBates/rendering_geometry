@@ -13,6 +13,19 @@ struct Vertex {
 	vec2 texcoord;
 };
 
+struct Lighting{
+	vec3 diffuse;
+	float specular;
+	vec3 dir;
+};
+
+struct Material {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+
+};
+
  
 class Mesh
 {

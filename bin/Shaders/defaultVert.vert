@@ -11,7 +11,6 @@ void main()
 {
 vColour = Color; 
 
-
 gl_Position = projectionViewWorldMatrix * Pos;
 
 }

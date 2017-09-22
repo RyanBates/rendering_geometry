@@ -60,7 +60,6 @@ void Mesh::initialize(vector<Vertex>& verts, vector<unsigned int>& indices)
 	}
 	m_index_count = m_indices.size();
 
-	create_buffers();
 }
 
 void Mesh::bind()

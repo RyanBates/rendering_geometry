@@ -6,12 +6,14 @@ layout(location = 2) in vec4 Normal;
 
 out vec4 vPosition;
 out vec4 vNormal;
+out vec4 vColour;
 
-uniform mat4 ProjectionViewModel;
-uniform mat4 ModelMatrix;
-uniform mat4 NormalMatrix;
+uniform mat4 projectionViewWorldMatrix;
 
 void main() 
 { 
-	gl_Position = ProjectionViewModel * Position;
+	gl_Position = projectionViewWorldMatrix * Position;
+	vPosition = Position;
+	vNormal = Normal;
+	vColour = Colour;
 }

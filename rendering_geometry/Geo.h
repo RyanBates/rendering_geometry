@@ -4,6 +4,8 @@
 class Shader;
 class Mesh;
 struct Vertex;
+struct Lighting;
+struct Material;
 
 using namespace glm;
 using namespace std;

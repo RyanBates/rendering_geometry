@@ -1,63 +1,80 @@
 #version 410
 
 //ambient
-uniform vec3 Ka;
-uniform vec3 Ia;
+vec4 Ka;
+vec4 Ia;
 
 //diffuse
-uniform vec3 Kd;
-uniform vec3 Id;
+vec4 Kd;
+vec4 Id;
 
 //specular
-uniform vec3 Ks;
-uniform vec3 Is;
+vec3 Ks;
+vec3 Is;
 uniform float specularPower;
 
-uniform vec3 L; //light direction
-uniform vec3 V; // camera view
-uniform vec3 R; // reflection ray
+
+vec3 L; //light direction
+vec3 V; // camera view
+vec3 R; // reflection ray
 
 in vec4 vNormal;
 in vec4 vPosition;
+in vec4 vColour;
+in vec4 vCamPosition;
 out vec4 fragColour;
-
-float dot(vec3 a, vec3 b)
-{
-	dot = (a.x * b.x) + (a.y * b.y) + (a.z * b.z); // d = dot
-}
 
 void main() 
 { 
-
+	float a = dot(vNormal.xyz, vec3(0,1.f,0));
+	vec3 hemisphere = .5f * mix(vec3(0,1,0), vec3(0,0,1), a) * .5f;
+	
 	//ambient
-	Ka = new vec3(0);
-	Ia = new vec3(0);
-	vec3 ambient = Ka * Ia;
-
-
+	Ka = vec4(hemisphere, 1);
+	Ia = vec4(1);
+	vec4 ambient = Ka * Ia;
+	
 	// diffuse
-	Kd = new vec3(0);
+	Kd = vec4(1);
+	Id = vec4(1);
 
-	float LdotN = dot(L, vNormal);
+	L = normalize(vec3(1,1, 0));
+	vec3 N = normalize(vNormal.xyz);
 
-	vec3 diffuse = Kd * LdotN;
+	float LdotN = dot(L, N);
 
+
+	vec4 diffuse = Kd * LdotN * Id;
+
+
+	//specular
+	Ks = vec3(1);
+	Is = vec3(1); 
+	vec3 cam = vec3(10, 0, 1);
 
 	//specular not using blinn-phong
-	Ks = new vec3(0);
-
-	specularPower = 10;
-
-	flaot RdotV = dot(R, V);
+	R = reflect(-L, N);
+	V = normalize(cam - vPosition.xyz);
 	
-	vec3 specular_p = Ks * (RdotV * specularPower) * Is; 
+	float RdotV = dot(R, V);
+	float influnce = max(0, RdotV);
 
+	float specularTerm = pow(influnce, specularPower);
+	vec3 specular_p = Ks * specularTerm * Is; 
+
+	/////////////////////////////////////////////////
 
 	//specular using blinn-phong
-	float bp = dot(L, V);
 
-	vec3 spcular_bp = Ks * (bp * specularPower) * Is;
+	vec3 H = normalize(L + V);
+	float HdotN = dot(H, N);
+	float influnces = max(0, HdotN);
+
+	float specularTerms = pow(influnces, specularPower);
+
+	vec3 specular_bp = Ks * (specularTerms) * Is;
 
 	//light called
-	FragColor = (ambient, 1);
+	fragColour = ambient + diffuse + vec4(specular_bp, 1);
+	
 }
