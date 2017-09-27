@@ -5,27 +5,15 @@
 
 struct Vertex {
 
-	vec4 Position;
-	vec4 Color;
+	vec4 position;
+	vec4 color;
 	vec4 normal;
 	vec4 tangent;
 	vec4 bitangent;
 	vec2 texcoord;
-};
-
-struct Lighting{
-	vec3 diffuse;
-	float specular;
-	vec3 dir;
-};
-
-struct Material {
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
+	vec2 UV;
 
 };
-
  
 class Mesh
 {
@@ -45,7 +33,6 @@ public:
 	unsigned int m_VBO;
 	unsigned int m_IBO;
 
-protected:
 	std::vector<unsigned int>m_indices;
 	std::vector<Vertex> m_vertices;
 

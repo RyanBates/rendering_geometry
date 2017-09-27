@@ -23,6 +23,10 @@ vec3 L; //light direction
 vec3 V; // camera view
 vec3 R; // reflection ray
 
+uniform vec4 Am; // ambient
+uniform vec4 Di; // diffuse
+uniform vec4 Sp; // specular
+
 in vec4 vNormal;
 in vec4 vPosition;
 in vec4 vColour;
@@ -41,7 +45,7 @@ void main()
 	Ka = vec4(0);
 	Ia = vec4(1);
 	vec4 color = vec4(red + Ka.x, green + Ka.y, blue + Ka.z, 1);
-	vec4 ambient = color * Ia;
+	vec4 ambient = (Am + color) * Ia;
 	
 	////////////////////////////////////////////////////
 
@@ -88,6 +92,11 @@ void main()
 	//////////////////////////////////////////////////
 
 	//light called
-	fragColour = ambient + diffuse + vec4(specular_bp, 1);
+	
+	
+	//fragColour = ambient + diffuse + vec4(specular_p, 1); // phong lighting 
+
+
+	fragColour = ambient + diffuse + vec4(specular_bp, 1); // binn-phong lighting
 	
 }

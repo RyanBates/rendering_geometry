@@ -3,6 +3,7 @@
 #include <glm\glm.hpp>
 class Shader;
 class Mesh;
+class Textures;
 struct Vertex;
 struct Lighting;
 struct Material;
@@ -31,4 +32,5 @@ public:
 
 	Shader * shade;
 	Mesh* mesh;
+	Textures* text;
 };

@@ -1,10 +1,11 @@
 #include "Geo.h"
 #include "Mesh.h"
+#include "Textures.h"
 
 int main()
 {
 	
-	Application* app = new Geo();
+	Application* app = new Textures();
 
 	app->run("pls work", 1600, 900, false);
 

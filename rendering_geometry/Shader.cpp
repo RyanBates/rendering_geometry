@@ -80,18 +80,18 @@ void Shader::attach()
 
 void Shader::defaultLoad()
 {
-	m_vsSource = "#version 410\n \
-	layout(location=0) in vec4 position; \
-	layout(location=1) in vec4 Colour; \
-	out vec4 vColour; \
-	uniform mat4 projectionViewWorldMatrix; \
-	void main() { vColour = Colour; gl_Position =\
-	projectionViewWorldMatrix * position; }";
-	
-	m_fsSource = "#version 410\n \
-	in vec4 vColour; \
-	out vec4 fragColour;\
-	void main() { fragColour = vColour; }";
+	//m_vsSource = "#version 410\n \
+	//layout(location=0) in vec4 position; \
+	//layout(location=1) in vec4 Colour; \
+	//out vec4 vColour; \
+	//uniform mat4 projectionViewWorldMatrix; \
+	//void main() { vColour = Colour; gl_Position =\
+	//projectionViewWorldMatrix * position; }";
+	//
+	//m_fsSource = "#version 410\n \
+	//in vec4 vColour; \
+	//out vec4 fragColour;\
+	//void main() { fragColour = vColour; }";
 
 	
 

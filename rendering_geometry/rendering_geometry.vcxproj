@@ -24,6 +24,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dep\bootstrap\include\Application.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="gl_core_4_4.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Textures.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\bin\Shaders\defaultFrag.frag" />
@@ -90,7 +92,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(SolutionDir)dep\bootstrap\include;$(SolutionDir)dep\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(SolutionDir)dep\bootstrap\include;$(SolutionDir)dep\imgui;$(SolutionDir)dep\stb;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dep\bootstrap\lib-vc2015;$(SolutionDir)dep\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
