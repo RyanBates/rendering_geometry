@@ -11,7 +11,12 @@ vec4 Id;
 //specular
 vec3 Ks;
 vec3 Is;
+
+
 uniform float specularPower;
+uniform float red;
+uniform float green;
+uniform float blue;
 
 
 vec3 L; //light direction
@@ -28,12 +33,18 @@ void main()
 { 
 	float a = dot(vNormal.xyz, vec3(0,1.f,0));
 	vec3 hemisphere = .5f * mix(vec3(0,1,0), vec3(0,0,1), a) * .5f;
+
+
+	///////////////////////////////////////////////////////
 	
 	//ambient
-	Ka = vec4(hemisphere, 1);
+	Ka = vec4(0);
 	Ia = vec4(1);
-	vec4 ambient = Ka * Ia;
+	vec4 color = vec4(red + Ka.x, green + Ka.y, blue + Ka.z, 1);
+	vec4 ambient = color * Ia;
 	
+	////////////////////////////////////////////////////
+
 	// diffuse
 	Kd = vec4(1);
 	Id = vec4(1);
@@ -46,6 +57,7 @@ void main()
 
 	vec4 diffuse = Kd * LdotN * Id;
 
+	//////////////////////////////////////////////////
 
 	//specular
 	Ks = vec3(1);
@@ -65,7 +77,6 @@ void main()
 	/////////////////////////////////////////////////
 
 	//specular using blinn-phong
-
 	vec3 H = normalize(L + V);
 	float HdotN = dot(H, N);
 	float influnces = max(0, HdotN);
@@ -73,6 +84,8 @@ void main()
 	float specularTerms = pow(influnces, specularPower);
 
 	vec3 specular_bp = Ks * (specularTerms) * Is;
+
+	//////////////////////////////////////////////////
 
 	//light called
 	fragColour = ambient + diffuse + vec4(specular_bp, 1);

@@ -23,47 +23,47 @@ Geo::Geo()
 Geo::~Geo()
 {
 }
-//
-//void Geo::generateGrid(unsigned int rows, unsigned int cols)
-//{
-//	//this is what gives the color to the objects.
-//	Vertex* aoVertices = new Vertex[rows * cols];
-//
-//	for (unsigned int r = 0; r < rows; ++r)
-//		for (unsigned int c = 0; c < cols; ++c)
-//		{
-//			aoVertices[r * cols + c].Position = vec4((float)c, 0, (float)r, 1);
-//			// create some arbitrary colour based off something
-//			// that might not be related to tiling a texture
-//			vec3 colour = vec3(sinf((c / (float)(cols - 1))* (r / (float)(rows - 1))));
-//			aoVertices[r * cols + c].Color = vec4(colour, 1);
-//		}
-//
-//	//this is what will give the points to the trangles.
-//	unsigned int* auiIndices = new unsigned int[(rows - 1) * (cols - 1) * 6];
-//
-//	unsigned int index = 0;
-//	for (unsigned int r = 0; r<(rows - 1); ++r)
-//		for (unsigned int c = 0; c < (cols - 1); ++c)
-//		{
-//			//tri 1
-//			auiIndices[index++] = r * cols + c;
-//			auiIndices[index++] = (r + 1) * cols + c;
-//			auiIndices[index++] = (r + 1) * cols + (c + 1);
-//			//tri2
-//			auiIndices[index++] = r * cols + c;
-//			auiIndices[index++] = (r + 1)* cols + (c + 1);
-//			auiIndices[index++] = r * cols + (c + 1);
-//		}
-//
-//
-//	glBufferData(GL_ARRAY_BUFFER, (rows * cols) * sizeof(Vertex), aoVertices, GL_STATIC_DRAW);
-//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
-//
-//		
-//	delete[] aoVertices;
-//	delete[] auiIndices;
-//}
+
+void Geo::generateGrid(unsigned int rows, unsigned int cols)
+{
+	//this is what gives the color to the objects.
+	Vertex* aoVertices = new Vertex[rows * cols];
+
+	for (unsigned int r = 0; r < rows; ++r)
+		for (unsigned int c = 0; c < cols; ++c)
+		{
+			aoVertices[r * cols + c].Position = vec4((float)c, 0, (float)r, 1);
+			// create some arbitrary colour based off something
+			// that might not be related to tiling a texture
+			vec3 colour = vec3(sinf((c / (float)(cols - 1))* (r / (float)(rows - 1))));
+			aoVertices[r * cols + c].Color = vec4(colour, 1);
+		}
+
+	//this is what will give the points to the trangles.
+	unsigned int* auiIndices = new unsigned int[(rows - 1) * (cols - 1) * 6];
+
+	unsigned int index = 0;
+	for (unsigned int r = 0; r<(rows - 1); ++r)
+		for (unsigned int c = 0; c < (cols - 1); ++c)
+		{
+			//tri 1
+			auiIndices[index++] = r * cols + c;
+			auiIndices[index++] = (r + 1) * cols + c;
+			auiIndices[index++] = (r + 1) * cols + (c + 1);
+			//tri2
+			auiIndices[index++] = r * cols + c;
+			auiIndices[index++] = (r + 1)* cols + (c + 1);
+			auiIndices[index++] = r * cols + (c + 1);
+		}
+
+
+	glBufferData(GL_ARRAY_BUFFER, (rows * cols) * sizeof(Vertex), aoVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
+
+		
+	delete[] aoVertices;
+	delete[] auiIndices;
+}
 
 vector<vec4> generateHalfCircle(int r, int np)
 {
@@ -153,7 +153,7 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 			float x0 = r0 * glm::sin(segment * segmentAngle);
 			float z0 = r0 * glm::cos(segment * segmentAngle);
 
-			vertex->position = glm::vec4(x0 * 0.5f, y0 * 0.5f, z0 * 0.5f, 1);
+			vertex->Position = glm::vec4(x0 * 0.5f, y0 * 0.5f, z0 * 0.5f, 1);
 			vertex->normal = glm::vec4(x0, y0, z0, 0);
 
 			vertex->tangent = glm::vec4(glm::sin(segment * segmentAngle + glm::half_pi<float>()), 0, glm::cos(segment * segmentAngle + glm::half_pi<float>()), 0);
@@ -226,7 +226,7 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 }
 void Geo::startup()
 {
-	auto eye = vec3(10, 0, 1);
+	auto eye = vec3(10, 10, 10);
 	auto center = vec3(0);
 	auto up = vec3(0, 1, 0);
 
@@ -264,54 +264,68 @@ void Geo::startup()
 	/// indinces for cube
 
 	/// indinces for sphere
-	//vector<Vertex> ver;
-	//vector<unsigned int> uints;
+	vector<Vertex> ver;
+	vector<unsigned int> uints;
 
-	//int r = 10;
-	//int np = 10;
-	//int nm = 10;
+	int r = 10;
+	int np = 10;
+	int nm = 10;
 
-	//vector<vec4>halfcircle = generateHalfCircle(r, np);
+	vector<vec4>halfcircle = generateHalfCircle(r, np);
 
-	//vector<vec4>sphere = genSphere(halfcircle, nm);
+	vector<vec4>sphere = genSphere(halfcircle, nm);
 
-	//uints = sphereIndinces(nm, np);
+	uints = sphereIndinces(nm, np);
 
-	//for (auto p : sphere)
-	//{
-	//	Vertex vert = { p, vec4(0, 0, 0, 1) };
-	//	ver.push_back(vert);
-	//}
+	for (auto p : sphere)
+	{
+		Vertex vert = { p, vec4(1) };
+		ver.push_back(vert);
+	}
 
-	//mesh->create_buffers();
-	//mesh->initialize(ver, uints);
+	mesh->create_buffers();
+	mesh->initialize(ver, uints);
 
 	///matthew's call function
-	unsigned int i = 100;
-	unsigned int j = 100;
+	//unsigned int i = 100;
+	//unsigned int j = 100;
 
-	generateSphere(i, j, mesh->m_VAO, mesh->m_VBO, mesh->m_IBO, mesh->m_index_count);
+	//generateSphere(i, j, mesh->m_VAO, mesh->m_VBO, mesh->m_IBO, mesh->m_index_count);
+
+	generateGrid(10, 10);
 }
 
 float specularPower = 10;
+float red = 0;
+float green= 0;
+float blue = 0;
+
 
 void Geo::draw()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	ImGui::Begin("do it");
-	ImGui::SliderFloat("spec power", &specularPower, 10, 255);
+	ImGui::SliderFloat("spec power", &specularPower, 10, 500000);
+	ImGui::SliderFloat("red", &red, 0.f, 1.f);
+	ImGui::SliderFloat("green", &green, 0.f, 1.f);
+	ImGui::SliderFloat("blue", &blue, 0.f, 1.f);
 	ImGui::End();
 
 	shade->bind();
+
+
 	
 	unsigned handle = shade->getUniform("projectionViewWorldMatrix");
-	
+		
 	mesh->bind();
 	auto trans = glm::mat4(1);
 	trans = translate(trans, vec3(0, 0, 0));
 	auto mvp = m_projectionView * trans;
 	glUniformMatrix4fv(handle, 1, false, value_ptr(mvp));
 	glUniform1f(shade->getUniform("specularPower"), specularPower);
+	glUniform1f(shade->getUniform("red"), red);
+	glUniform1f(shade->getUniform("green"), green);
+	glUniform1f(shade->getUniform("blue"), blue);
 	glDrawElements(GL_TRIANGLES, mesh->m_index_count, GL_UNSIGNED_INT, 0);
 	mesh->unbind();
 	shade->unbind();
