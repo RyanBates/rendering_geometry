@@ -1,4 +1,13 @@
-﻿  Textures.cpp
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\textures.cpp(82): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-  rendering_geometry.vcxproj -> C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
-  rendering_geometry.vcxproj -> C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)
+﻿  Geo.cpp
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(34): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(38): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(39): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(40): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(41): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(53): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(56): warning C4018: '<': signed/unsigned mismatch
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(80): warning C4018: '<': signed/unsigned mismatch
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(84): warning C4018: '<': signed/unsigned mismatch
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(72): warning C4101: 'vertex': unreferenced local variable
+  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
+  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)

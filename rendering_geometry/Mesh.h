@@ -8,10 +8,11 @@ struct Vertex {
 	vec4 position;
 	vec4 color;
 	vec4 normal;
+	vec2 UV;
 	vec4 tangent;
 	vec4 bitangent;
 	vec2 texcoord;
-	vec2 UV;
+
 
 };
  

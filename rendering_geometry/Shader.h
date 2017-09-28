@@ -18,6 +18,5 @@ public:
 	const char* m_fsSource;
 
 
-private:
 	unsigned int m_program;
 };

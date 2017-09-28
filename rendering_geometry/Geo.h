@@ -1,12 +1,11 @@
 #pragma once
 #include <Application.h>
 #include <glm\glm.hpp>
+
 class Shader;
 class Mesh;
 class Textures;
 struct Vertex;
-struct Lighting;
-struct Material;
 
 using namespace glm;
 using namespace std;
@@ -17,13 +16,11 @@ public:
 	Geo();
 	~Geo();
 
-	void generateGrid(unsigned int rows, unsigned int cols);
 	void startup();
 	void shutdown();
 	void update(float);
 	void draw();
 	
-	unsigned int m_programID;
 
 	unsigned int rows;
 	unsigned int cols;
@@ -33,4 +30,5 @@ public:
 	Shader * shade;
 	Mesh* mesh;
 	Textures* text;
+
 };

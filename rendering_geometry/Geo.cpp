@@ -12,8 +12,7 @@
 #include "Mesh.h"
 #include "Textures.h"
 
-
-float PI = 3.14159265359;
+#define PI 3.14159265359
 
 Geo::Geo()
 {
@@ -25,47 +24,6 @@ Geo::Geo()
 Geo::~Geo()
 {
 }
-
-//void Geo::generateGrid(unsigned int rows, unsigned int cols)
-//{
-//	//this is what gives the color to the objects.
-//	Vertex* aoVertices = new Vertex[rows * cols];
-//
-//	for (unsigned int r = 0; r < rows; ++r)
-//		for (unsigned int c = 0; c < cols; ++c)
-//		{
-//			aoVertices[r * cols + c].Position = vec4((float)c, 0, (float)r, 1);
-//			// create some arbitrary colour based off something
-//			// that might not be related to tiling a texture
-//			vec3 colour = vec3(sinf((c / (float)(cols - 1))* (r / (float)(rows - 1))));
-//			aoVertices[r * cols + c].Color = vec4(colour, 1);
-//		}
-//
-//	//this is what will give the points to the trangles.
-//	unsigned int* auiIndices = new unsigned int[(rows - 1) * (cols - 1) * 6];
-//
-//	unsigned int index = 0;
-//	for (unsigned int r = 0; r<(rows - 1); ++r)
-//		for (unsigned int c = 0; c < (cols - 1); ++c)
-//		{
-//			//tri 1
-//			auiIndices[index++] = r * cols + c;
-//			auiIndices[index++] = (r + 1) * cols + c;
-//			auiIndices[index++] = (r + 1) * cols + (c + 1);
-//			//tri2
-//			auiIndices[index++] = r * cols + c;
-//			auiIndices[index++] = (r + 1)* cols + (c + 1);
-//			auiIndices[index++] = r * cols + (c + 1);
-//		}
-//
-//
-//	glBufferData(GL_ARRAY_BUFFER, (rows * cols) * sizeof(Vertex), aoVertices, GL_STATIC_DRAW);
-//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
-//
-//		
-//	delete[] aoVertices;
-//	delete[] auiIndices;
-//}
 
 vector<vec4> generateHalfCircle(int r, int np)
 {
@@ -90,16 +48,16 @@ vector<vec4> genSphere(vector<vec4> np, int nm)
 {
 	vector<vec4> sphere;
 
-	for (int i = 0; i < nm; ++i)
+	for (int i = 0; i <= nm; i++)
 	{
-		float slice = (2 * PI) / nm;
+		float slice = (2.f * PI) / nm;
 		float phi = i * slice;
 
-		for (int j = 0; j < np.size(); ++j)
+		for (int j = 0; j < np.size(); j++)
 		{
-			float newX = np[j].x * sin(phi) * np[j].z * cos(phi);
+			float newX = np[j].x * cos(phi) + np[j].z * sin(phi);
 			float newY = np[j].y;
-			float newZ = np[j].z* cos(phi) * np[j].x * sin(phi);
+			float newZ = np[j].z* cos(phi) - np[j].x * sin(phi);
 
 			sphere.push_back(vec4(newX, newY, newZ, 1.f));
 		}
@@ -119,17 +77,16 @@ vector<unsigned int> sphereIndinces(unsigned int nm, unsigned int np)
 	unsigned int botLeft;
 	unsigned int botRight;
 
-	for (int i = 0; i < nm; ++i)
+	for (int i = 0; i < nm; i++)
 	{
 		start = i * np;
 
-		for (int j = 0; j < np; ++j)
+		for (int j = 0; j < np; j++)
 		{
 			botLeft = start + j;
 			botRight = botLeft + np;
 			rotate.push_back(botLeft);
 			rotate.push_back(botRight);
-
 
 		}
 		rotate.push_back(0xffff);
@@ -234,7 +191,7 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 
 void Geo::startup()
 {
-	auto eye = vec3(10, 10, 10);
+	auto eye = vec3(15, 15, 15);
 	auto center = vec3(0);
 	auto up = vec3(0, 1, 0);
 
@@ -244,67 +201,35 @@ void Geo::startup()
 
 	m_projectionView = projection * view;
 
-
-	//loading from the shader class
-
 	shade->load("./Shaders/phong.vert", GL_VERTEX_SHADER);
 	shade->load("./Shaders/phong.frag", GL_FRAGMENT_SHADER);
 
+	
+	text->load();
 
-	//shade->defaultLoad();
 	shade->attach();
 
-
-	//this is to populate 
-
-
-	/// indinces for plane
-
-	///matthew's plane
-	//Vertex a = { glm::vec4(-5,  0, 0, 1)		, glm::vec4(.1, .1, .1, 1) };//bl	
-	//Vertex b = { glm::vec4(5,  0, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//br
-	//Vertex c = { glm::vec4(5, -5, 0, 1)			, glm::vec4(.1, .1, .1, 1) };//tl
-	//Vertex d = { glm::vec4(-5, -5, 0, 1)		, glm::vec4(1, 0, 0, 1) };//tr
-	//Vertex e = { glm::vec4(-5,  5, 0, 1)		, glm::vec4(0, 0, 1, 1) };//tr	
-
-	//std::vector<Vertex> vertices{ a,b,c,d,e };
-	//std::vector<unsigned int> indices{ 0, 1, 2, 0, 2, 3, 0, 4, 1 };
-
-	//mesh->create_buffers();
-	//mesh->initialize(vertices, indices);
-
+	vec4 p;
 	///indinces for plane
-	Vertex a = { vec4(-5,0,0,1) };
-	Vertex b = { vec4(5,0,0,1) };
-	Vertex c = { vec4(0,5,0,1) };
-	Vertex d = { vec4(5,5,0,1) };
+	Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
 	std::vector<Vertex> vertices{ a,b,c,d };
-	std::vector<unsigned int> indices{ 0, 1, 2, 1, 3, 2  };
+	std::vector<unsigned int> indices{ 0, 1, 2, 3 };
 
-	mesh->create_buffers();
+		
 	mesh->initialize(vertices, indices);
-
-	/// indinces for cube
-	//Vertex a = { vec4(-5,0,0,1) };
-	//Vertex b = { vec4(5,0,0,1) };
-	//Vertex c = { vec4(0,5,0,1) };
-	//Vertex d = { vec4(5,5,0,1) };
-
-	//std::vector<Vertex> vertices{ a,b,c,d };
-	//std::vector<unsigned int> indices{ 0, 1, 2, 1, 3, 2 };
-
-	//mesh->create_buffers();
-	//mesh->initialize(vertices, indices);
-
-
+	mesh->create_buffers();
+	
 	/// indinces for sphere
-	//vector<Vertex> ver;
-	//vector<unsigned int> uints;
+	vector<Vertex> ver;
+	vector<unsigned int> uints;
 
-	//int r = 10;
-	//int np = 10;
-	//int nm = 10;
+	//int r = 5;
+	//int np = 60;
+	//int nm = 60;
 
 	//vector<vec4>halfcircle = generateHalfCircle(r, np);
 
@@ -314,18 +239,18 @@ void Geo::startup()
 
 	//for (auto p : sphere)
 	//{
-	//	Vertex vert = { p, vec4(1) };
+	//	Vertex vert = { p, vec4(1), normalize(p) };
 	//	ver.push_back(vert);
 	//}
 
-	//mesh->create_buffers();
 	//mesh->initialize(ver, uints);
+	//mesh->create_buffers();
+	
+	///matthew's sphere function
+	//unsigned int i = 100;
+	//unsigned int j = 100;
 
-	///matthew's call function
-	unsigned int i = 100;
-	unsigned int j = 100;
-
-	generateSphere(i, j, mesh->m_VAO, mesh->m_VBO, mesh->m_IBO, mesh->m_index_count);
+	//generateSphere(i, j, mesh->m_VAO, mesh->m_VBO, mesh->m_IBO, mesh->m_index_count);
 }
 
 float specularPower = 10;
@@ -333,40 +258,40 @@ float red = 0;
 float green= 0;
 float blue = 0;
 
+float lightDirX = 0;
+float lightDirY = 0;
+float lightDirZ = 0;
 
 void Geo::draw()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	ImGui::Begin("Light");
 	ImGui::SliderFloat("spec power", &specularPower, 10, 255);
-	ImGui::End();
-
-	ImGui::Begin("Colors");
-	ImGui::SliderFloat("red", &red, 0.f, 1.f);
-	ImGui::SliderFloat("green", &green, 0.f, 1.f);
-	ImGui::SliderFloat("blue", &blue, 0.f, 1.f);
+	ImGui::SliderFloat("light direction x axis", &lightDirX, -1, 1);
+	ImGui::SliderFloat("light direction y axis", &lightDirY, -1, 1);
+	ImGui::SliderFloat("light direction z axis", &lightDirZ, -1, 1);
 	ImGui::End();
 
 	shade->bind();
 	
 	unsigned handle = shade->getUniform("projectionViewWorldMatrix");
-		
+	
 	mesh->bind();
+
 	auto trans = mat4(1);
-	trans = translate(trans, vec3(0, 0, 0));
+	trans = translate(trans, vec3(0,0,0));
 	auto mvp = m_projectionView * trans;
+	
 	glUniformMatrix4fv(handle, 1, false, value_ptr(mvp));
 
 	glUniform1f(shade->getUniform("specularPower"), specularPower);
-	glUniform1f(shade->getUniform("red"), red);
-	glUniform1f(shade->getUniform("green"), green);
-	glUniform1f(shade->getUniform("blue"), blue);
+	glUniform1f(shade->getUniform("LDX"), lightDirX);
+	glUniform1f(shade->getUniform("LDY"), lightDirY);
+	glUniform1f(shade->getUniform("LDZ"), lightDirZ);
 
-	glDrawElements(GL_TRIANGLES, mesh->m_index_count, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLE_STRIP, mesh->m_index_count, GL_UNSIGNED_INT, 0);
 	mesh->unbind();
-	shade->unbind();
-
-	
+	shade->unbind();	
 }
 
 void Geo::update(float)
