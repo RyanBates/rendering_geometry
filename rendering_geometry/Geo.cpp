@@ -11,17 +11,18 @@
 #include "Shader.h"
 #include "Mesh.h"
 #include "Textures.h"
+#include <iostream>
 
 #define PI 3.14159265359
 
-Geo::Geo()
+GeometryApplication::GeometryApplication()
 {
-	shade = new Shader();
-	mesh = new Mesh();
-	text = new Textures();
+	shade = new ShaderApplication();
+	mesh = new MeshApplication();
+	text = new TextureApplication();
 }
 
-Geo::~Geo()
+GeometryApplication::~GeometryApplication()
 {
 }
 
@@ -189,7 +190,7 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 	delete[] vertices;
 }
 
-void Geo::startup()
+void GeometryApplication::startup()
 {
 	auto eye = vec3(15, 15, 15);
 	auto center = vec3(0);
@@ -211,41 +212,41 @@ void Geo::startup()
 
 	vec4 p;
 	///indinces for plane
-	Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
-	Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
-	Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
-	Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
+	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	//Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
-	std::vector<Vertex> vertices{ a,b,c,d };
-	std::vector<unsigned int> indices{ 0, 1, 2, 3 };
+	//std::vector<Vertex> vertices{ a,b,c,d };
+	//std::vector<unsigned int> indices{ 0, 1, 2, 3 };
 
-		
-	mesh->initialize(vertices, indices);
-	mesh->create_buffers();
+	
+	//mesh->initialize(vertices, indices);
+	//mesh->create_buffers();
 	
 	/// indinces for sphere
 	vector<Vertex> ver;
 	vector<unsigned int> uints;
 
-	//int r = 5;
-	//int np = 60;
-	//int nm = 60;
+	int r = 5;
+	int np = 60;
+	int nm = 60;
 
-	//vector<vec4>halfcircle = generateHalfCircle(r, np);
+	vector<vec4>halfcircle = generateHalfCircle(r, np);
 
-	//vector<vec4>sphere = genSphere(halfcircle, nm);
+	vector<vec4>sphere = genSphere(halfcircle, nm);
 
-	//uints = sphereIndinces(nm, np);
+	uints = sphereIndinces(nm, np);
 
-	//for (auto p : sphere)
-	//{
-	//	Vertex vert = { p, vec4(1), normalize(p) };
-	//	ver.push_back(vert);
-	//}
+	for (auto p : sphere)
+	{		
+		Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (np - 55), -p.y / (nm - 55)) };
+		ver.push_back(vert);	
+	}
+			
+	mesh->initialize(ver, uints);
+	mesh->create_buffers();
 
-	//mesh->initialize(ver, uints);
-	//mesh->create_buffers();
-	
 	///matthew's sphere function
 	//unsigned int i = 100;
 	//unsigned int j = 100;
@@ -258,18 +259,18 @@ float red = 0;
 float green= 0;
 float blue = 0;
 
-float lightDirX = 0;
-float lightDirY = 0;
-float lightDirZ = 0;
+float lightDirX = 5;
+float lightDirY = 5;
+float lightDirZ = 5;
 
-void Geo::draw()
+void GeometryApplication::draw()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	ImGui::Begin("Light");
 	ImGui::SliderFloat("spec power", &specularPower, 10, 255);
-	ImGui::SliderFloat("light direction x axis", &lightDirX, -1, 1);
-	ImGui::SliderFloat("light direction y axis", &lightDirY, -1, 1);
-	ImGui::SliderFloat("light direction z axis", &lightDirZ, -1, 1);
+	ImGui::SliderFloat("light direction x axis", &lightDirX, -10.f, 10.f);
+	ImGui::SliderFloat("light direction y axis", &lightDirY, -10.f, 10.f);
+	ImGui::SliderFloat("light direction z axis", &lightDirZ, -10.f, 10.f);
 	ImGui::End();
 
 	shade->bind();
@@ -279,7 +280,7 @@ void Geo::draw()
 	mesh->bind();
 
 	auto trans = mat4(1);
-	trans = translate(trans, vec3(0,0,0));
+	trans = translate(trans, vec3(0));
 	auto mvp = m_projectionView * trans;
 	
 	glUniformMatrix4fv(handle, 1, false, value_ptr(mvp));
@@ -294,11 +295,11 @@ void Geo::draw()
 	shade->unbind();	
 }
 
-void Geo::update(float)
+void GeometryApplication::update(float)
 {	
 	
 }
 
-void Geo::shutdown()
+void GeometryApplication::shutdown()
 {
 }

@@ -1,9 +1,9 @@
 #pragma once
-class Shader
+class ShaderApplication
 {
 public:
-	Shader();
-	~Shader();
+	ShaderApplication();
+	~ShaderApplication();
 
 	void bind();
 	void unbind();

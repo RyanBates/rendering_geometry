@@ -5,15 +5,15 @@
 #include <assert.h>
 using namespace std;
 
-Mesh::Mesh()
+MeshApplication::MeshApplication()
 {
 }
 
-Mesh::~Mesh()
+MeshApplication::~MeshApplication()
 {
 }
 
-void Mesh::create_buffers()
+void MeshApplication::create_buffers()
 {
 	
 	//generates Buffer Objects.
@@ -55,7 +55,7 @@ void Mesh::create_buffers()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Mesh::initialize(vector<Vertex>& verts, vector<unsigned int>& indices)
+void MeshApplication::initialize(vector<Vertex>& verts, vector<unsigned int>& indices)
 {
 	for (auto v : verts)
 	{
@@ -70,12 +70,12 @@ void Mesh::initialize(vector<Vertex>& verts, vector<unsigned int>& indices)
 
 }
 
-void Mesh::bind()
+void MeshApplication::bind()
 {
 	glBindVertexArray(m_VAO);
 }
 
-void Mesh::unbind()
+void MeshApplication::unbind()
 {
 	glBindVertexArray(0);
 }

@@ -16,11 +16,11 @@ struct Vertex {
 
 };
  
-class Mesh
+class MeshApplication
 {
 public:
-	Mesh();
-	~Mesh();
+	MeshApplication();
+	~MeshApplication();
 
 	void initialize(std::vector<Vertex>&verts, std::vector<unsigned int>&indices);
 	void create_buffers();

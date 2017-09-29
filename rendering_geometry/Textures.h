@@ -1,13 +1,13 @@
 #pragma once
 #include "Application.h"
-class Mesh;
-class Shader;
+class MeshApplication;
+class ShaderApplication;
 
-class Textures : public Application
+class TextureApplication : public Application
 {
 public:
-	Textures();
-	virtual ~Textures();
+	TextureApplication();
+	virtual ~TextureApplication();
 
 	void load();
 
@@ -18,7 +18,7 @@ public:
 	
 	unsigned int m_texture;	
 		
-	Shader* shade;
-	Mesh* mesh;
+	ShaderApplication* shade;
+	MeshApplication* mesh;
 };
 

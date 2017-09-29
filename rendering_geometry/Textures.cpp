@@ -12,25 +12,23 @@
 #include "Shader.h"
 #include "Mesh.h"
 
-Textures::Textures()
+TextureApplication::TextureApplication()
 {
-	shade = new Shader();
-	mesh = new Mesh();
+	shade = new ShaderApplication();
+	mesh = new MeshApplication();
 }
 
-Textures::~Textures()
+TextureApplication::~TextureApplication()
 {
 }
 
-void Textures::load()
+void TextureApplication::load()
 {
 
 
 	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
-	int imageWidth2 = 0, imageHeight2 = 0, imageFormat2 = 0;
 
-	unsigned char* data = stbi_load("./Textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
-	unsigned char* data2 = stbi_load("./Textures/morals.png", &imageWidth2, &imageHeight2, &imageFormat2, STBI_default);
+	unsigned char* data = stbi_load("./Textures/stich.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -43,18 +41,18 @@ void Textures::load()
 
 }
 
-void Textures::startup()
+void TextureApplication::startup()
 {
 }
 
-void Textures::draw()
+void TextureApplication::draw()
 {
 }
 
-void Textures::update(float)
+void TextureApplication::update(float)
 {
 }
 
-void Textures::shutdown()
+void TextureApplication::shutdown()
 {
 }

@@ -3,7 +3,7 @@
 int main()
 {
 	
-	Application* app = new Geo();
+	Application* app = new GeometryApplication();
 
 	app->run("pls work", 1600, 900, false);
 

@@ -2,19 +2,19 @@
 #include <Application.h>
 #include <glm\glm.hpp>
 
-class Shader;
-class Mesh;
-class Textures;
+class ShaderApplication;
+class MeshApplication;
+class TextureApplication;
 struct Vertex;
 
 using namespace glm;
 using namespace std;
 
-class Geo : public Application
+class GeometryApplication : public Application
 {
 public:
-	Geo();
-	~Geo();
+	GeometryApplication();
+	~GeometryApplication();
 
 	void startup();
 	void shutdown();
@@ -27,8 +27,8 @@ public:
 
 	mat4 m_projectionView;
 
-	Shader * shade;
-	Mesh* mesh;
-	Textures* text;
+	ShaderApplication * shade;
+	MeshApplication* mesh;
+	TextureApplication* text;
 
 };

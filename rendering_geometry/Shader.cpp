@@ -4,27 +4,27 @@
 #include "gl_core_4_4.h"
 #include <fstream>
 
-Shader::Shader()
+ShaderApplication::ShaderApplication()
 {	
 }
 
-Shader::~Shader()
+ShaderApplication::~ShaderApplication()
 {
 }
 
-void Shader::bind()
+void ShaderApplication::bind()
 {
 	glUseProgram(m_program);
 
 }
 
-void Shader::unbind() 
+void ShaderApplication::unbind() 
 {
 	glUseProgram(0);
 
 }
 
-void Shader::load(const char * filename, unsigned int type)
+void ShaderApplication::load(const char * filename, unsigned int type)
 {
 	std::string line, contents;
 	std::ifstream in(filename);
@@ -56,7 +56,7 @@ void Shader::load(const char * filename, unsigned int type)
 	}
 }
 
-void Shader::attach()
+void ShaderApplication::attach()
 {
 	m_program = glCreateProgram();
 	glAttachShader(m_program, m_vertexShader);
@@ -78,7 +78,7 @@ void Shader::attach()
 	glDeleteShader(m_vertexShader);
 }
 
-void Shader::defaultLoad()
+void ShaderApplication::defaultLoad()
 {
 	//m_vsSource = "#version 410\n \
 	//layout(location=0) in vec4 position; \
@@ -106,7 +106,7 @@ void Shader::defaultLoad()
  
 }
 
-unsigned int Shader::getUniform(const char* name)
+unsigned int ShaderApplication::getUniform(const char* name)
 {
 	return glGetUniformLocation(m_program, name);
 }
