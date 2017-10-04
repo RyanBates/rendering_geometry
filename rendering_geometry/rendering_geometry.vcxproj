@@ -93,7 +93,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(SolutionDir)dep\bootstrap\include;$(SolutionDir)dep\imgui;$(SolutionDir)dep\stb;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dep\bootstrap\lib-vc2015;$(SolutionDir)dep\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)dep\bootstrap;$(SolutionDir)dep\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -28,7 +28,7 @@ void TextureApplication::load()
 
 	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
 
-	unsigned char* data = stbi_load("./Textures/stich.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	unsigned char* data = stbi_load("./Textures/earth.jpg", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
