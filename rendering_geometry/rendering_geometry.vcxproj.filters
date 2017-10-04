@@ -64,11 +64,13 @@
     <None Include="..\bin\Shaders\defaultVert.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\bin\Shaders\phong.frag">
+    <None Include="..\bin\Shaders\lighting.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\bin\Shaders\phong.vert">
+    <None Include="..\bin\Shaders\lighting.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\bin\Shaders\texture.frag" />
+    <None Include="..\bin\Shaders\texture.vert" />
   </ItemGroup>
 </Project>

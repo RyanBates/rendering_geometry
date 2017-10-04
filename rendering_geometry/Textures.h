@@ -17,6 +17,7 @@ public:
 	void shutdown(); 
 	
 	unsigned int m_texture;	
+	unsigned int m_perlinTexture;
 		
 	ShaderApplication* shade;
 	MeshApplication* mesh;

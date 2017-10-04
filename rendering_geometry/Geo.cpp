@@ -190,6 +190,7 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 	delete[] vertices;
 }
 
+
 void GeometryApplication::startup()
 {
 	auto eye = vec3(15, 15, 15);
@@ -202,9 +203,10 @@ void GeometryApplication::startup()
 
 	m_projectionView = projection * view;
 
-	shade->load("./Shaders/phong.vert", GL_VERTEX_SHADER);
-	shade->load("./Shaders/phong.frag", GL_FRAGMENT_SHADER);
-
+	shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
+	//shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
+	shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
+	//shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
 	
 	text->load();
 
@@ -220,12 +222,23 @@ void GeometryApplication::startup()
 	std::vector<Vertex> vertices{ a,b,c,d };
 	std::vector<unsigned int> indices{ 0, 1, 2, 3 };
 
-	
 	mesh->initialize(vertices, indices);
 	mesh->create_buffers();
+
 	
 	///cube indinces
+	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	//Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
+
+
+	//std::vector<Vertex> vertices{ a,b,c,d };
+	//std::vector<unsigned int> indices{ 0, 1, 2, 3 };
+
+	//mesh->initialize(vertices, indices);
+	//mesh->create_buffers();
 
 	/// indinces for sphere
 	//vector<Vertex> ver;
@@ -243,7 +256,7 @@ void GeometryApplication::startup()
 
 	//for (auto p : sphere)
 	//{		
-	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (np - 55), -p.y / (nm - 55)) };
+	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (float)(np - 55), -p.y / (float)(nm - 55)) };
 	//	ver.push_back(vert);	
 	//}
 	//		
@@ -257,14 +270,11 @@ void GeometryApplication::startup()
 	//generateSphere(i, j, mesh->m_VAO, mesh->m_VBO, mesh->m_IBO, mesh->m_index_count);
 }
 
-float specularPower = 10;
-float red = 0;
-float green= 0;
-float blue = 0;
+float specularPower = 150;
 
-float lightDirX = 5;
-float lightDirY = 5;
-float lightDirZ = 5;
+float lightDirX = 7;
+float lightDirY = 7;
+float lightDirZ = 7;
 
 void GeometryApplication::draw()
 {
@@ -297,6 +307,7 @@ void GeometryApplication::draw()
 	mesh->unbind();
 	shade->unbind();	
 }
+
 
 void GeometryApplication::update(float)
 {	

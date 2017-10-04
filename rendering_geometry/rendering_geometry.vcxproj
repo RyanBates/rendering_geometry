@@ -38,8 +38,10 @@
   <ItemGroup>
     <None Include="..\bin\Shaders\defaultFrag.frag" />
     <None Include="..\bin\Shaders\defaultVert.vert" />
-    <None Include="..\bin\Shaders\phong.frag" />
-    <None Include="..\bin\Shaders\phong.vert" />
+    <None Include="..\bin\Shaders\lighting.frag" />
+    <None Include="..\bin\Shaders\lighting.vert" />
+    <None Include="..\bin\Shaders\texture.frag" />
+    <None Include="..\bin\Shaders\texture.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{02C3FBDA-7488-4692-825E-FBB447A8C5F1}</ProjectGuid>
