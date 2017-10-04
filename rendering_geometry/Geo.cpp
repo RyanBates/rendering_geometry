@@ -212,40 +212,43 @@ void GeometryApplication::startup()
 
 	vec4 p;
 	///indinces for plane
-	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
-	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
-	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
-	//Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
+	Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
-	//std::vector<Vertex> vertices{ a,b,c,d };
-	//std::vector<unsigned int> indices{ 0, 1, 2, 3 };
+	std::vector<Vertex> vertices{ a,b,c,d };
+	std::vector<unsigned int> indices{ 0, 1, 2, 3 };
 
 	
-	//mesh->initialize(vertices, indices);
-	//mesh->create_buffers();
-	
-	/// indinces for sphere
-	vector<Vertex> ver;
-	vector<unsigned int> uints;
-
-	int r = 5;
-	int np = 60;
-	int nm = 60;
-
-	vector<vec4>halfcircle = generateHalfCircle(r, np);
-
-	vector<vec4>sphere = genSphere(halfcircle, nm);
-
-	uints = sphereIndinces(nm, np);
-
-	for (auto p : sphere)
-	{		
-		Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (np - 55), -p.y / (nm - 55)) };
-		ver.push_back(vert);	
-	}
-			
-	mesh->initialize(ver, uints);
+	mesh->initialize(vertices, indices);
 	mesh->create_buffers();
+	
+	///cube indinces
+
+
+	/// indinces for sphere
+	//vector<Vertex> ver;
+	//vector<unsigned int> uints;
+
+	//int r = 5;
+	//int np = 60;
+	//int nm = 60;
+
+	//vector<vec4>halfcircle = generateHalfCircle(r, np);
+
+	//vector<vec4>sphere = genSphere(halfcircle, nm);
+
+	//uints = sphereIndinces(nm, np);
+
+	//for (auto p : sphere)
+	//{		
+	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (np - 55), -p.y / (nm - 55)) };
+	//	ver.push_back(vert);	
+	//}
+	//		
+	//mesh->initialize(ver, uints);
+	//mesh->create_buffers();
 
 	///matthew's sphere function
 	//unsigned int i = 100;
