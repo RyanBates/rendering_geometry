@@ -31,7 +31,7 @@ void TextureApplication::load()
 	unsigned char* data = stbi_load("./Textures/earth.jpg", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
 	/// AIE's perlin noise function
-	int dims = 100;
+	int dims = 64;
 	float *perlinData = new float[dims * dims];
 	float scale = (1.f / dims) * 3;
 	int octaves = 6;
@@ -71,7 +71,8 @@ void TextureApplication::load()
 
 
 	stbi_image_free(data);
-
+
+
 
 }
 

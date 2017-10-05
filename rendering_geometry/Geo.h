@@ -16,8 +16,6 @@ public:
 	GeometryApplication();
 	~GeometryApplication();
 
-	void perlin(double x, double y, double z);
-
 	void startup();
 	void shutdown();
 	void update(float);

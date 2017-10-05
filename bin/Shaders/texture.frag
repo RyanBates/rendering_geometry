@@ -8,6 +8,6 @@ out vec4 fragColour;
 
 void main() 
 { 	
-	fragColour = texture(perlinTexture, vUv).rgra;	
+	fragColour = texture(perlinTexture, vUv).rrba;	
 }
 
