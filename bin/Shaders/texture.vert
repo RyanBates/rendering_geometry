@@ -14,8 +14,10 @@ void main()
 { 	
 	vPosition = Position * projectionViewWorldMatrix;
 
-	vPosition.y += texture(perlinTe xture, Uv).r * 5;
-
+	vPosition.x += texture(perlinTexture, Uv).r * (5 / 5);
+	vPosition.y += texture(perlinTexture, Uv).r * (5 / 3);
+	vPosition.z += texture(perlinTexture, Uv).r * (5 / 5);
+	
 	vUv = Uv;
 
 	gl_Position = vPosition;

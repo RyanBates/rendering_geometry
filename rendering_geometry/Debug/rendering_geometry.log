@@ -9,6 +9,5 @@ c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\render
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(81): warning C4018: '<': signed/unsigned mismatch
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(85): warning C4018: '<': signed/unsigned mismatch
 c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(73): warning C4101: 'vertex': unreferenced local variable
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)

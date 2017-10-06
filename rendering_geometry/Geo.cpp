@@ -96,35 +96,32 @@ vector<unsigned int> sphereIndinces(unsigned int nm, unsigned int np)
 	return rotate;
 }
 
-void genPlane(int width, int height)
+vector<vec4> genPlane(int width, int height)
 {
-	MeshApplication* mesh = new MeshApplication();
-
 	vector<vec4> points;
-	vector<Vertex> vertices;
-	vector<unsigned int> indinces;
 
-	for(int i = 0; i < width; i++)
-		for (int j = 0; j < height; j++)
+	for(int i = 0; i < width; ++i)
+		for (int j = 0; j < height; ++j)
 		{
 			points.push_back(vec4(i, 0, j, 1));
 		}
 
-	for (auto p : points)
-	{
-		Vertex vert = { p, vec4(1), normalize(p) };
-		vertices.push_back(vert);	
-	}
+	return points;
+}
+
+vector<unsigned int> planeInd(int width, int height)
+{
+	vector<unsigned int> indinces;
 
 	unsigned int start;
 	unsigned int botLeft;
 	unsigned int botRight;
 
-	for (int i = 0; i < width - 1; i++)
+	for (int i = 0; i < width; ++i)
 	{
 		start = i * height;
 
-		for (int j = 0; j < height; j++)
+		for (int j = 0; j < height; ++j)
 		{
 			botLeft = start + j;
 			botRight = botLeft + height;
@@ -134,9 +131,7 @@ void genPlane(int width, int height)
 		indinces.push_back(0xffff);
 	}
 
-	mesh->initialize(vertices, indinces);
-	mesh->create_buffers();
-
+	return indinces;
 }
 
 void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao, unsigned int& vbo, unsigned int& ibo, unsigned int& indexCount) 
@@ -258,7 +253,23 @@ void GeometryApplication::startup()
 	shade->attach();
 
 	///indinces for plane / procedural generated
-	genPlane(10, 10);
+	//vector<Vertex> vertices;
+	//
+	//int width = 10;
+	//int height = 10;
+
+	//vector<vec4> plane = genPlane(width, height);
+
+	//vector<unsigned int> ind = planeInd(width, height);
+
+	//for (auto p : plane)
+	//{
+	//	Vertex vert = { p, vec4(0), normalize(p), vec2(p.x * p.z, p.z * (p.x)) };
+	//	vertices.push_back(vert);
+	//}
+
+	//mesh->initialize(vertices, ind);
+	//mesh->create_buffers();
 
 	
 	///indinces for plane / hard set
@@ -288,28 +299,28 @@ void GeometryApplication::startup()
 	//mesh->initialize(vertices, indices);
 	//mesh->create_buffers();
 
-	///// indinces for sphere
-	//vector<Vertex> ver;
-	//vector<unsigned int> uints;
+	/// indinces for sphere
+	vector<Vertex> ver;
+	vector<unsigned int> uints;
 
-	//int r = 5;
-	//int np = 60;
-	//int nm = 60;
+	int r = 5;
+	int np = 60;
+	int nm = 60;
 
-	//vector<vec4>halfcircle = generateHalfCircle(r, np);
+	vector<vec4>halfcircle = generateHalfCircle(r, np);
 
-	//vector<vec4>sphere = genSphere(halfcircle, nm);
+	vector<vec4>sphere = genSphere(halfcircle, nm);
 
-	//uints = sphereIndinces(nm, np);
+	uints = sphereIndinces(nm, np);
 
-	//for (auto p : sphere)
-	//{		
-	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (float)(np - 55), -p.y / (float)(nm - 55))};
-	//	ver.push_back(vert);	
-	//}
-	//		
-	//mesh->initialize(ver, uints);
-	//mesh->create_buffers();
+	for (auto p : sphere)
+	{		
+		Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (float)(np - 55), -p.y / (float)(nm - 55))};
+		ver.push_back(vert);	
+	}
+			
+	mesh->initialize(ver, uints);
+	mesh->create_buffers();
 
 	///matthew's sphere function
 	//unsigned int i = 100;
@@ -343,7 +354,7 @@ void GeometryApplication::draw()
 	auto trans = mat4(1);
 	trans = translate(trans, vec3(0,0,0));
 	auto mvp = m_projectionView * trans;
-
+	
 	glUniformMatrix4fv(handle, 1, true, value_ptr(mvp));
 
 	glUniform1f(shade->getUniform("specularPower"), specularPower);
@@ -351,16 +362,21 @@ void GeometryApplication::draw()
 	glUniform1f(shade->getUniform("LDY"), lightDirY);
 	glUniform1f(shade->getUniform("LDZ"), lightDirZ);
 
-	glDrawElements(GL_TRIANGLE_STRIP, mesh->m_index_count, GL_UNSIGNED_INT, 0);
+
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	glDrawElements(GL_TRIANGLE_STRIP, mesh->m_index_count, GL_UNSIGNED_INT, 0);
 
 	mesh->unbind();
 	shade->unbind();	
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 
 void GeometryApplication::update(float)
 {	
+	
 }
 
 void GeometryApplication::shutdown()
