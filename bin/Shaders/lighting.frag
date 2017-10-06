@@ -55,7 +55,7 @@ void main()
 	////////////////////////////////////////////////////
 
 	// diffuse
-	Kd = vec4(1);
+	Kd = vec4(0,0,1,1);
 	Id = vec4(1);
 
 	L = normalize(vec3(LDX,LDY,LDZ));

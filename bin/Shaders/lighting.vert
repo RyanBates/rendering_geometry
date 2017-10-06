@@ -12,7 +12,7 @@ uniform mat4 projectionViewWorldMatrix;
 
 void main() 
 { 	
-	gl_Position = projectionViewWorldMatrix * Position;
+	gl_Position = Position * projectionViewWorldMatrix;
 
 	vNormal = Normal;
 	vPosition = Position;
