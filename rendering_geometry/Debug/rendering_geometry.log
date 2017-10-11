@@ -1,4 +1,5 @@
-﻿  LINK : C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe not found or not built by the last incremental link; performing full link
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  Textures.cpp
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\textures.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\textures.cpp(47): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
   rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)
