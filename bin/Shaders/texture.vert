@@ -12,11 +12,9 @@ uniform mat4 projectionViewWorldMatrix;
 
 void main() 
 { 	
-	vPosition = Position * projectionViewWorldMatrix;
+	vPosition = projectionViewWorldMatrix * Position;
 
-	vPosition.x += texture(perlinTexture, Uv).r * (5 / 5);
-	vPosition.y += texture(perlinTexture, Uv).r * (5 / 3);
-	vPosition.z += texture(perlinTexture, Uv).r * (5 / 5);
+	//vPosition.y  += texture(perlinTexture, Uv).r * 5;
 	
 	vUv = Uv;
 

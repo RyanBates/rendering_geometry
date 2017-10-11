@@ -96,11 +96,13 @@ vector<unsigned int> sphereIndinces(unsigned int nm, unsigned int np)
 	return rotate;
 }
 
+
+//this is for the vertices 
 vector<vec4> genPlane(int width, int height)
 {
 	vector<vec4> points;
 
-	for(int i = 0; i < width; ++i)
+	for(int i = 0; i < width-1; ++i)
 		for (int j = 0; j < height; ++j)
 		{
 			points.push_back(vec4(i, 0, j, 1));
@@ -109,27 +111,27 @@ vector<vec4> genPlane(int width, int height)
 	return points;
 }
 
+//this is for the indinces 
 vector<unsigned int> planeInd(int width, int height)
 {
 	vector<unsigned int> indinces;
 
 	unsigned int start;
-	unsigned int botLeft;
-	unsigned int botRight;
+	unsigned int end;
 
-	for (int i = 0; i < width; ++i)
-	{
-		start = i * height;
-
-		for (int j = 0; j < height; ++j)
+	for (int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
 		{
-			botLeft = start + j;
-			botRight = botLeft + height;
-			indinces.push_back(botLeft);
-			indinces.push_back(botRight);
+			start = i * height;
+
+			unsigned int x = start + j;
+			unsigned int z = x + height;
+
+			indinces.push_back(x);
+			indinces.push_back(z);
 		}
-		indinces.push_back(0xffff);
-	}
+
+	indinces.push_back(0xffff);
 
 	return indinces;
 }
@@ -254,38 +256,38 @@ void GeometryApplication::startup()
 	shade->attach();
 
 	///indinces for plane / procedural generated
-	//vector<Vertex> vertices;
-	//
-	//int width = 10;
-	//int height = 10;
+	vector<Vertex> vertices;
+	
+	int width = 10;
+	int height = 10;
 
-	//vector<vec4> plane = genPlane(width, height);
+	vector<vec4> plane = genPlane(width, height);
 
-	//vector<unsigned int> ind = planeInd(width, height);
+	vector<unsigned int> ind = planeInd(width, height);
 
-	//for (auto p : plane)
-	//{
-	//	Vertex vert = { p, vec4(1), normalize(p), vec2(p.x * p.x, p.z * (p.z)) };
-	//	vertices.push_back(vert);
-	//}
+	for (auto p : plane)
+	{
+		Vertex vert = { p, vec4(1), normalize(p), vec2(p.x / width,  p.z / height) };
+		vertices.push_back(vert);
+	}
 
-	//mesh->initialize(vertices, ind);
-	//mesh->create_buffers();
+	mesh->initialize(vertices, ind);
+	mesh->create_buffers();
 
 	
 	///indinces for plane / hard set
-	vec4 p;
+	//vec4 p;
 
-	Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
-	Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
-	Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
-	Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
+	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	//Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
-	std::vector<Vertex> vertices{ a,b,c,d };
-	std::vector<unsigned int> indices{ 0, 1, 2, 3 };
+	//std::vector<Vertex> verts{ a,b,c,d };
+	//std::vector<unsigned int> indices{ 0, 1, 2, 3 };
 
-	mesh->initialize(vertices, indices);
-	mesh->create_buffers();
+	//mesh->initialize(verts, indices);
+	//mesh->create_buffers();
 
 
 	///cube indinces
@@ -356,7 +358,7 @@ void GeometryApplication::draw()
 	trans = translate(trans, vec3(-5));
 	auto mvp = m_projectionView * trans;
 	
-	glUniformMatrix4fv(handle, 1, true, value_ptr(mvp));
+	glUniformMatrix4fv(handle, 1, false, value_ptr(mvp));
 
 	glUniform1f(shade->getUniform("specularPower"), specularPower);
 	glUniform1f(shade->getUniform("LDX"), lightDirX);
