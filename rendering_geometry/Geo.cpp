@@ -102,8 +102,8 @@ vector<vec4> genPlane(int width, int height)
 {
 	vector<vec4> points;
 
-	for(int i = 0; i < width-1; ++i)
-		for (int j = 0; j < height; ++j)
+	for(int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
 		{
 			points.push_back(vec4(i, 0, j, 1));
 		}
@@ -119,11 +119,11 @@ vector<unsigned int> planeInd(int width, int height)
 	unsigned int start;
 	unsigned int end;
 
-	for (int i = 0; i < width; i++)
+	for (int i = 0; i < width - 1; i++)
 		for (int j = 0; j < height; j++)
 		{
-			start = i * height;
-
+			start = i * width;
+			 
 			unsigned int x = start + j;
 			unsigned int z = x + height;
 
@@ -245,8 +245,8 @@ void GeometryApplication::startup()
 	shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
 	shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
 
-	shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
-	shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
+	//shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
+	//shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
 
 
 	//shade->defaultLoad();
@@ -318,7 +318,7 @@ void GeometryApplication::startup()
 
 	//for (auto p : sphere)
 	//{		
-	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (float)(np - 55), -p.y / (float)(nm - 55))};
+	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (float)(np - 55), -p.z / (float)(nm - 55))};
 	//	ver.push_back(vert);	
 	//}
 	//		
@@ -334,9 +334,9 @@ void GeometryApplication::startup()
 
 float specularPower = 150;
 
-float lightDirX = 7;
-float lightDirY = 7;
-float lightDirZ = 7;
+float lightDirX = 2;
+float lightDirY = 2;
+float lightDirZ = 2;
 
 void GeometryApplication::draw()
 {

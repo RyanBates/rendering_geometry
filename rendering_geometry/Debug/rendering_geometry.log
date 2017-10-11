@@ -1,2 +1,4 @@
-﻿  rendering_geometry.vcxproj -> C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
-  rendering_geometry.vcxproj -> C:\Users\S178071\Documents\Visual Studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)
+﻿  LINK : C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe not found or not built by the last incremental link; performing full link
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
+  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)

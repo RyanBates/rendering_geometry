@@ -28,7 +28,7 @@ void TextureApplication::load()
 
 	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
 
-	unsigned char* data = stbi_load("./Textures/earth.jpg", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	unsigned char* data = stbi_load("./Textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
 	/// AIE's perlin noise function
 	int dims = 64;
@@ -43,14 +43,13 @@ void TextureApplication::load()
 			perlinData[y * dims + x] = 0;
 			for (int o = 0; o < octaves; ++o)
 			{
-				float freq = powf(2, (float)o);
-				float perlinSample = glm::perlin(vec2((float)x, (float)y) * scale * freq) * 0.5f + 0.5f;
+				float freq = powf(2, o);
+				float perlinSample = glm::perlin(vec2((float)x, (float)y) * scale * freq) * .5 + .5;
 				perlinData[y * dims + x] += perlinSample * amplitude;
 				amplitude *= persistence;
 			}
-		}
+		}
 
-	/// perlin function
 
 
 
