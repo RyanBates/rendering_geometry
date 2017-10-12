@@ -48,9 +48,9 @@ void main()
 	///////////////////////////////////////////////////////
 	
 	//ambient
-	Ka = vec4(0);
+	Ka = vec4(hemisphere, 1);
 	Ia = vec4(1);
-	vec4 ambient = Ka * Ia;
+	vec4 ambient = Ka * Ia ;
 	
 	////////////////////////////////////////////////////
 
@@ -68,7 +68,7 @@ void main()
 
 	//////////////////////////////////////////////////
 
-	//specular
+	//specular using phong
 	Ks = vec3(1);
 	Is = vec3(1); 
 	vec3 cam = vec3(10, 0, 1);

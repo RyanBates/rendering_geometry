@@ -44,7 +44,7 @@ void TextureApplication::load()
 			for (int o = 0; o < octaves; ++o)
 			{
 				float freq = powf(2, o);
-				float perlinSample = glm::perlin(vec2((float)x, (float)y) * scale * freq) * .5 + .5;
+				float perlinSample = glm::perlin(vec2(x, y) * scale * freq) * .5 + .5;
 				perlinData[y * dims + x] += perlinSample * amplitude;
 				amplitude *= persistence;
 			}

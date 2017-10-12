@@ -14,7 +14,7 @@ void main()
 { 	
 	vPosition = projectionViewWorldMatrix * Position;
 
-	vPosition.y  += texture(perlinTexture, Uv).r * 5;
+	//vPosition.y  += texture(perlinTexture, Uv).r * 5;
 	
 	vUv = Uv;
 
