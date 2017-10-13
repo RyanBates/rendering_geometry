@@ -6,8 +6,12 @@
 #include <glm\ext.hpp>
 #include <glm\fwd.hpp>
 #include <imgui.h>
+#include <Gizmos.h>
 #include <imgui_impl_glfw_gl3.h>
 #include <vector>
+#include <iostream>
+#include "Camera.h"
+#include "FlyCamera.h"
 #include "Shader.h"
 #include "Mesh.h"
 #include "Textures.h"
@@ -20,6 +24,8 @@ GeometryApplication::GeometryApplication()
 	shade = new ShaderApplication();
 	mesh = new MeshApplication();
 	text = new TextureApplication();
+	f_cam = new FlyCamera();
+
 }
 
 GeometryApplication::~GeometryApplication()
@@ -233,20 +239,24 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 
 void GeometryApplication::startup()
 {
-	auto eye = vec3(15, 15, 15);
-	auto center = vec3(0);
-	auto up = vec3(0, 1, 0);
+	//auto eye = vec3(15, 15, 15);
+	//auto center = vec3(0);
+	//auto up = vec3(0, 1, 0);
 
-	auto projection = glm::perspective(quarter_pi<float>(), 16.f / 9.f, .1f, 1000.f);
-	auto view = glm::lookAt(eye, center, up);
+	//auto projection = glm::perspective(quarter_pi<float>(), 16.f / 9.f, .1f, 1000.f);
+	//auto view = glm::lookAt(eye, center, up);
 
-	m_projectionView = projection * view;
+	//m_projectionView = projection * view;
 
-	shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
-	shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
+	m_projectionView = cam->getProjectionView();
+	
+	//f_cam->update(0);
 
-	//shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
-	//shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
+	//shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
+	//shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
+
+	shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
+	shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
 
 
 	//shade->defaultLoad();
@@ -256,28 +266,27 @@ void GeometryApplication::startup()
 	shade->attach();
 
 	///indinces for plane / procedural generated
-	vector<Vertex> vertices;
-	
-	int width = 10;
-	int height = 10;
+	//vector<Vertex> vertices;
+	//
+	//int width = 10;
+	//int height = 10;
 
-	vector<vec4> plane = genPlane(width, height);
+	//vector<vec4> plane = genPlane(width, height);
 
-	vector<unsigned int> ind = planeInd(width, height);
+	//vector<unsigned int> ind = planeInd(width, height);
 
-	for (auto p : plane)
-	{
-		Vertex vert = { p, vec4(1), normalize(p), vec2(p.x / width,  p.z / height) };
-		vertices.push_back(vert);
-	}
+	//for (auto p : plane)
+	//{
+	//	Vertex vert = { p, vec4(1), normalize(p), vec2(p.x / width,  p.z / width) };
+	//	vertices.push_back(vert);
+	//}
 
-	mesh->initialize(vertices, ind);
-	mesh->create_buffers();
+	//mesh->initialize(vertices, ind);
+	//mesh->create_buffers();
 
-	
+	vec4 p;
 	///indinces for plane / hard set
-	//vec4 p;
-
+	
 	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
 	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
 	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
@@ -291,24 +300,28 @@ void GeometryApplication::startup()
 
 
 	///cube indinces
-	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
-	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
-	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
-	//Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
+	Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
+	Vertex e = { p = vec4(0,5,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	Vertex f = { p = vec4(5,5,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	Vertex g = { p = vec4(0,5,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	Vertex h = { p = vec4(5,5,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
-	//std::vector<Vertex> vertices{ a,b,c,d };
-	//std::vector<unsigned int> indices{ 0, 1, 2, 3 };
+	std::vector<Vertex> vertices{ a,b,c,d,e,f,g,h };
+	std::vector<unsigned int> indices{ 0, 1, 2, 3, 0xf, 4, 5, 6, 7, 0xf, 0, 4, 7, 8 };
 
-	//mesh->initialize(vertices, indices);
-	//mesh->create_buffers();
+	mesh->initialize(vertices, indices);
+	mesh->create_buffers();
 
-	/// indinces for sphere
+	///indinces for sphere
 	//vector<Vertex> ver;
 	//vector<unsigned int> uints;
 
 	//int r = 5;
-	//int np = 60;
-	//int nm = 60;
+	//int np = 100;
+	//int nm = 100;
 
 	//vector<vec4>halfcircle = generateHalfCircle(r, np);
 
@@ -318,7 +331,7 @@ void GeometryApplication::startup()
 
 	//for (auto p : sphere)
 	//{		
-	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (float)(np - 55), -p.z / (float)(nm - 55))};
+	//	Vertex vert = { p, vec4(1), normalize(p), vec2(-p.x / (np - 95), -p.y / (np - 95))};
 	//	ver.push_back(vert);	
 	//}
 	//		
@@ -349,13 +362,13 @@ void GeometryApplication::draw()
 	ImGui::End();
 
 	shade->bind();
-	
+
 	unsigned handle = shade->getUniform("projectionViewWorldMatrix");
 	
 	mesh->bind();
 
 	auto trans = mat4(1);
-	trans = translate(trans, vec3(-5));
+	trans = translate(trans, vec3(-10, -3, -10));
 	auto mvp = m_projectionView * trans;
 	
 	glUniformMatrix4fv(handle, 1, false, value_ptr(mvp));
@@ -376,10 +389,8 @@ void GeometryApplication::draw()
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-
 void GeometryApplication::update(float)
-{	
-	
+{
 }
 
 void GeometryApplication::shutdown()

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="FlyCamera.cpp" />
     <ClCompile Include="Geo.cpp" />
     <ClCompile Include="gl_core_4_4.c" />
     <ClCompile Include="main.cpp" />
@@ -28,7 +30,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dep\bootstrap\include\Application.h" />
-    <ClInclude Include="..\dep\bootstrap\include\Camera.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="FlyCamera.h" />
     <ClInclude Include="Geo.h" />
     <ClInclude Include="gl_core_4_4.h" />
     <ClInclude Include="Mesh.h" />

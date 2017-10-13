@@ -5,6 +5,8 @@
 class ShaderApplication;
 class MeshApplication;
 class TextureApplication;
+class CameraApplication;
+class FlyCamera;
 struct Vertex;
 
 using namespace glm;
@@ -27,8 +29,12 @@ public:
 
 	mat4 m_projectionView;
 
+
+	Application* app;
 	ShaderApplication * shade;
 	MeshApplication* mesh;
 	TextureApplication* text;
+	CameraApplication* cam;
+	FlyCamera* f_cam;
 
 };
