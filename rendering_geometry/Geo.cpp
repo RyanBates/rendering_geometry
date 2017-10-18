@@ -252,14 +252,14 @@ void GeometryApplication::startup()
 	
 	//f_cam->update(0);
 
-	shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
-	shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
+	//shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
+	//shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
 
 	//shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
 	//shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
 
 
-	//shade->defaultLoad();
+	shade->defaultLoad();
 	
 	text->load();
 
@@ -313,32 +313,32 @@ void GeometryApplication::startup()
 	std::vector<unsigned int> indices
 	{
 		//bottom face
-		0, 1, 2, 3, 
+		0, 1, 2,  0, 3, 2,
 
 		0xf, 
 		
 		//front face
-		4, 5, 6, 7, 
+		4, 3, 0,  4, 7, 3,
 		
 		0xf, 
 		
 		//right face
-		0, 4, 7, 8, 
+		4, 1, 5,  4, 0, 1,
 		
 		0xf, 
 	
 		//back face
-		9, 10, 11, 12, 
+		3, 6, 2,  3, 7, 6, 
 
 		0xf,
 
 		//left face
-
+		1, 6, 5,  1, 2, 6,
 
 		0xf,
 
 		//top face
-
+		7, 5, 6,  7, 4, 5
 
 	
 	};

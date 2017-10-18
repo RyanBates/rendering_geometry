@@ -48,7 +48,8 @@ void main()
 	///////////////////////////////////////////////////////
 	
 	//ambient
-	Ka = vec4(hemisphere, 1);
+	//Ka = vec4(hemisphere, 1);
+	Ka = vec4(0);
 	Ia = vec4(1);
 	vec4 ambient = Ka * Ia ;
 	
