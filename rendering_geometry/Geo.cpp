@@ -252,11 +252,11 @@ void GeometryApplication::startup()
 	
 	//f_cam->update(0);
 
-	//shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
-	//shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
+	shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
+	shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
 
-	shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
-	shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
+	//shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
+	//shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
 
 
 	//shade->defaultLoad();
@@ -310,7 +310,38 @@ void GeometryApplication::startup()
 	Vertex h = { p = vec4(5,5,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
 	std::vector<Vertex> vertices{ a,b,c,d,e,f,g,h };
-	std::vector<unsigned int> indices{ 0, 1, 2, 3, 0xf, 4, 5, 6, 7, 0xf, 0, 4, 7, 8 };
+	std::vector<unsigned int> indices
+	{
+		//bottom face
+		0, 1, 2, 3, 
+
+		0xf, 
+		
+		//front face
+		4, 5, 6, 7, 
+		
+		0xf, 
+		
+		//right face
+		0, 4, 7, 8, 
+		
+		0xf, 
+	
+		//back face
+		9, 10, 11, 12, 
+
+		0xf,
+
+		//left face
+
+
+		0xf,
+
+		//top face
+
+
+	
+	};
 
 	mesh->initialize(vertices, indices);
 	mesh->create_buffers();

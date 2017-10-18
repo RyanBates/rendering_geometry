@@ -28,7 +28,7 @@ void TextureApplication::load()
 
 	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
 
-	unsigned char* data = stbi_load("./Textures/earth.jpg", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	unsigned char* data = stbi_load("./Textures/deathstar.jpg", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
 	/// AIE's perlin noise function
 	int dims = 100;

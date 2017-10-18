@@ -1,14 +1,13 @@
 ﻿  Geo.cpp
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(45): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(46): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(48): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(60): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(63): warning C4018: '<': signed/unsigned mismatch
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(87): warning C4018: '<': signed/unsigned mismatch
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(91): warning C4018: '<': signed/unsigned mismatch
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(79): warning C4101: 'vertex': unreferenced local variable
-c:\users\s178071\documents\visual studio 2015\projects\rendering_geometry\rendering_geometry\geo.cpp(126): warning C4101: 'end': unreferenced local variable
-  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.exe
-  rendering_geometry.vcxproj -> C:\Users\S178071\documents\visual studio 2015\Projects\rendering_geometry\Debug\rendering_geometry.pdb (Partial PDB)
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(45): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(46): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(47): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(48): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(60): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(63): warning C4018: '<': signed/unsigned mismatch
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(91): warning C4018: '<': signed/unsigned mismatch
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(79): warning C4101: 'vertex': unreferenced local variable
+c:\users\justi\onedrive\documents\github\rendering_geometry\rendering_geometry\geo.cpp(126): warning C4101: 'end': unreferenced local variable
+  rendering_geometry.vcxproj -> C:\Users\justi\OneDrive\Documents\GitHub\rendering_geometry\Debug\rendering_geometry.exe
