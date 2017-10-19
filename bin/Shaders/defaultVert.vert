@@ -1,7 +1,7 @@
 #version 410
 
-in vec4 Pos;
-in vec4 Color;
+layout(location=0) in vec4 Pos;
+layout(location=1) in vec4 Color;
 
 out vec4 vColour;
 

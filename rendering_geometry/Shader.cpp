@@ -15,13 +15,11 @@ ShaderApplication::~ShaderApplication()
 void ShaderApplication::bind()
 {
 	glUseProgram(m_program);
-
 }
 
 void ShaderApplication::unbind() 
 {
 	glUseProgram(0);
-
 }
 
 void ShaderApplication::load(const char * filename, unsigned int type)
@@ -52,7 +50,6 @@ void ShaderApplication::load(const char * filename, unsigned int type)
 		m_fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(m_fragmentShader, 1, (const char **)&m_fsSource, 0);
 		glCompileShader(m_fragmentShader);
-
 	}
 }
 

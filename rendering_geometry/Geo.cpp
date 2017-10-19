@@ -239,27 +239,20 @@ void generateSphere(unsigned int segments, unsigned int rings,	unsigned int& vao
 
 void GeometryApplication::startup()
 {
-	//auto eye = vec3(15, 15, 15);
-	//auto center = vec3(0);
-	//auto up = vec3(0, 1, 0);
-
-	//auto projection = glm::perspective(quarter_pi<float>(), 16.f / 9.f, .1f, 1000.f);
-	//auto view = glm::lookAt(eye, center, up);
-
-	//m_projectionView = projection * view;
-
 	m_projectionView = cam->getProjectionView();
 	
 	//f_cam->update(0);
 
-	//shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
-	//shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
+	shade->load("./Shaders/texture.vert", GL_VERTEX_SHADER);
+	shade->load("./Shaders/texture.frag", GL_FRAGMENT_SHADER);
 
 	//shade->load("./Shaders/lighting.vert", GL_VERTEX_SHADER);
 	//shade->load("./Shaders/lighting.frag", GL_FRAGMENT_SHADER);
 
+	//shade->load("./Shaders/defaultVert.vert", GL_VERTEX_SHADER);
+	//shade->load("./Shaders/defaultFrag.frag", GL_FRAGMENT_SHADER);
 
-	shade->defaultLoad();
+	//shade->defaultLoad();
 	
 	text->load();
 
@@ -287,64 +280,62 @@ void GeometryApplication::startup()
 	vec4 p;
 	///indinces for plane / hard set
 	
-	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
-	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
-	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
-	//Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
-
-	//std::vector<Vertex> verts{ a,b,c,d };
-	//std::vector<unsigned int> indices{ 0, 1, 2, 3 };
-
-	//mesh->initialize(verts, indices);
-	//mesh->create_buffers();
-
-
-	///cube indinces
 	Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
 	Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
 	Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
 	Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
-	Vertex e = { p = vec4(0,5,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
-	Vertex f = { p = vec4(5,5,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
-	Vertex g = { p = vec4(0,5,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
-	Vertex h = { p = vec4(5,5,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
 
-	std::vector<Vertex> vertices{ a,b,c,d,e,f,g,h };
-	std::vector<unsigned int> indices
-	{
-		//bottom face
-		0, 1, 2,  0, 3, 2,
+	std::vector<Vertex> verts{ a,b,c,d };
+	std::vector<unsigned int> indices{ 0, 1, 2, 3 };
 
-		0xf, 
-		
-		//front face
-		4, 3, 0,  4, 7, 3,
-		
-		0xf, 
-		
-		//right face
-		4, 1, 5,  4, 0, 1,
-		
-		0xf, 
-	
-		//back face
-		3, 6, 2,  3, 7, 6, 
-
-		0xf,
-
-		//left face
-		1, 6, 5,  1, 2, 6,
-
-		0xf,
-
-		//top face
-		7, 5, 6,  7, 4, 5
-
-	
-	};
-
-	mesh->initialize(vertices, indices);
+	mesh->initialize(verts, indices);
 	mesh->create_buffers();
+
+
+	///cube indinces
+	//Vertex a = { p = vec4(0,0,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	//Vertex b = { p = vec4(5,0,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	//Vertex c = { p = vec4(0,0,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	//Vertex d = { p = vec4(5,0,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
+	//Vertex e = { p = vec4(0,5,0,1), vec4(0,0,0,1), normalize(p), vec2(0,0) };
+	//Vertex f = { p = vec4(5,5,0,1), vec4(0,0,0,1), normalize(p), vec2(1,0) };
+	//Vertex g = { p = vec4(0,5,5,1), vec4(0,0,0,1), normalize(p), vec2(0,1) };
+	//Vertex h = { p = vec4(5,5,5,1), vec4(0,0,0,1), normalize(p), vec2(1,1) };
+
+	//std::vector<Vertex> vertices{ a,b,c,d,e,f,g,h };
+	//std::vector<unsigned int> indices
+	//{
+	//	//bottom face
+	//	0, 1, 2,  0, 3, 2,
+
+	//	0xf, 
+	//	
+	//	//front face
+	//	4, 3, 0,  4, 7, 3,
+	//	
+	//	0xf, 
+	//
+	//	//right face
+	//	4, 1, 5,  4, 0, 1,
+	//	
+	//	0xf, 
+	//
+	//	//back face
+	//	3, 6, 2,  3, 7, 6, 
+
+	//	0xf,
+
+	//	//left face
+	//	1, 6, 5,  1, 2, 6,
+
+	//	0xf,
+
+	//	//top face
+	//	7, 5, 6,  7, 4, 5
+	//};
+
+	//mesh->initialize(vertices, indices);
+	//mesh->create_buffers();
 
 	///indinces for sphere
 	//vector<Vertex> ver;

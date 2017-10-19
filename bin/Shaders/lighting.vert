@@ -12,9 +12,10 @@ uniform mat4 projectionViewWorldMatrix;
 
 void main() 
 { 	
+
 	gl_Position = projectionViewWorldMatrix * Position;
 
 	vNormal = Normal;
 	vPosition = Position;
-	vColour = Colour;
+	vColour = Colour;	
 }
